@@ -1,0 +1,110 @@
+<div
+  style="position:fixed;top:0;z-index:1000;box-shadow:0 2px 5px rgba(0, 0, 0, 0.1);display:flex;justify-content:flex-start;align-items:center;padding:10px 100px;background-color:rgb(245, 245, 245);width:100%;">
+
+  <div style="margin-right: auto;">
+    <h1 style="margin: 0;cursor: pointer;font-weight:600"><a href="/">Trang chủ</a></h1>
+  </div>
+
+  <ul class="ul-header"
+    style="display: flex; align-items: center; margin: 0 auto; gap: 30px; list-style-type: none; font-weight: 400;">
+    <li class="header-items">Hàng mới về</li>
+    <li class="header-items">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer;">
+          Đồ nam
+        </button>
+        <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item dropdown-item-header" href="/nam">Quần áo nam</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Áo sơ mi</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Áo thun</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Áo khoác</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Quần dài</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Quần đùi</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="header-items">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+          aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer;">
+          Đồ nữ
+        </button>
+        <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton2">
+          <li><a class="dropdown-item dropdown-item-header" href="#">Áo</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Quần</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Váy</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="header-items">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown"
+          aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer;">
+          Phụ kiện
+        </button>
+        <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton3">
+          <li><a class="dropdown-item dropdown-item-header" href="#">Áo</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Quần</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="#">Váy</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="header-items">Khác</li>
+  </ul>
+
+  <div style="display: flex; align-items: center; gap: 15px;">
+    <div style="position: relative;">
+      <input id="search-input" type="search" placeholder="Bạn đang tìm gì?" aria-label="Search"
+        style="width: 200px; padding: 5px 30px 5px 10px; border-radius: 20px; border: 1px solid #ccc; outline: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+        viewBox="0 0 16 16"
+        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+        onclick="handleSearch()">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+      </svg>
+    </div>
+
+
+    <div class="dropdown">
+      <button class="btn dropdown-toggle-header" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer; padding: 0;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+        </svg>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item dropdown-item-header" href="/account/login">Đăng nhập</a></li>
+        <li><a class="dropdown-item dropdown-item-header" href="/account/signup">Đăng kí</a></li>
+        <li><a class="dropdown-item dropdown-item-header" href="#">Đăng xuất</a></li>
+      </ul>
+    </div>
+
+
+
+    <button style="background: none; border: none; cursor: pointer;margin-top:-4px">
+      <a href="/cart" style="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4"
+          viewBox="0 0 16 16">
+          <path
+            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
+        </svg>
+      </a>
+    </button>
+  </div>
+
+</div>
+
+<script>
+  function handleSearch() {
+    const searchInput = document.getElementById('search-input').value.trim();
+    if (searchInput) {
+      window.location.href = `/search?q=${encodeURIComponent(searchInput)}`;
+    } else {
+      alert('Vui long nhap thong tin!');
+    }
+  }
+</script>

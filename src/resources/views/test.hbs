@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show More Images Example</title>
+    <style>
+        #image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .image {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <!-- Rendered images will go here -->
+    </div>
+
+    <button id="prev-button" style="display: none;">Previous</button>
+    <button id="next-button">Next</button>
+
+    <script id="image-template" type="text/x-handlebars-template">
+        <div class="image">
+            <img src="{{src}}" alt="{{alt}}" style="width: 100%;">
+            <p>{{alt}}</p>
+        </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
+    <script>
+        // Sample array of images
+        const images = [
+            { src: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Image+1', alt: 'Image 1' },
+            { src: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Image+2', alt: 'Image 2' },
+            { src: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Image+3', alt: 'Image 3' },
+            { src: 'https://via.placeholder.com/150/FFFF00/FFFFFF?text=Image+4', alt: 'Image 4' },
+            { src: 'https://via.placeholder.com/150/FF00FF/FFFFFF?text=Image+5', alt: 'Image 5' },
+            { src: 'https://via.placeholder.com/150/00FFFF/FFFFFF?text=Image+6', alt: 'Image 6' },
+            { src: 'https://via.placeholder.com/150/000000/FFFFFF?text=Image+7', alt: 'Image 7' }
+        ];
+
+        let currentIndex = 0; // Start at the beginning
+        const imagesPerPage = 4; // Number of images to show per click
+
+        // Function to render images
+        function renderImages() {
+            const container = document.getElementById('image-container');
+            container.innerHTML = ''; // Clear the container
+
+            const nextImages = images.slice(currentIndex, currentIndex + imagesPerPage);
+            const template = Handlebars.compile(document.getElementById('image-template').innerHTML);
+            nextImages.forEach(image => {
+                container.innerHTML += template(image);
+            });
+
+            // Update button visibility
+            document.getElementById('prev-button').style.display = currentIndex > 0 ? 'inline-block' : 'none';
+            document.getElementById('next-button').style.display = currentIndex + imagesPerPage < images.length ? 'inline-block' : 'none';
+        }
+
+        // Event listener for the "Next" button
+        document.getElementById('next-button').addEventListener('click', () => {
+            if (currentIndex + imagesPerPage < images.length) {
+                currentIndex += 3; // Show next 3 images
+                renderImages();
+            }
+        });
+
+        // Event listener for the "Previous" button
+        document.getElementById('prev-button').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex = Math.max(0, currentIndex - imagesPerPage); // Show the first 4 images
+                renderImages();
+            }
+        });
+
+        // Load initial images
+        renderImages();
+    </script>
+</body>
+</html>
