@@ -1,8 +1,6 @@
 const accountRouter=require('./account')
+const adminRouter=require('./admin')
 function route(app) {
-  app.use('/cart', (req,res)=>{
-    res.render('cart')
-  });
   app.use('/product', (req,res)=>{
     res.render('product')
   })
@@ -10,6 +8,7 @@ function route(app) {
     res.render('nam')
   })
   app.use('/account',accountRouter)
+  app.use('/admin',adminRouter)
   app.use('/test', (req,res)=>{res.render('test')});
   app.get('/', (req, res) => {
     res.render('home');

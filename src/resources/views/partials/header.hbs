@@ -56,7 +56,7 @@
   <div style="display: flex; align-items: center; gap: 15px;">
     <div style="position: relative;">
       <input id="search-input" type="search" placeholder="Bạn đang tìm gì?" aria-label="Search"
-        style="width: 200px; padding: 5px 30px 5px 10px; border-radius: 20px; border: 1px solid #ccc; outline: none;">
+        style="width: 200px; padding: 5px 30px 5px 10px; border-radius: 0px; border: 1px solid #ccc; outline: none;">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
         viewBox="0 0 16 16"
         style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
@@ -68,25 +68,26 @@
 
 
     <div class="dropdown">
-      <button class="btn dropdown-toggle-header" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-        aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer; padding: 0;">
+      <button class="btn dropdown-toggle-header" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+        aria-expanded="false" aria-label="Open user menu"
+        style="background: none; border: none; color: inherit; cursor: pointer; padding: 0;">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person"
           viewBox="0 0 16 16">
           <path
             d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
         </svg>
       </button>
-      <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton1">
+      <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton2">
         <li><a class="dropdown-item dropdown-item-header" href="/account/login">Đăng nhập</a></li>
         <li><a class="dropdown-item dropdown-item-header" href="/account/signup">Đăng kí</a></li>
+        <li><a class="dropdown-item dropdown-item-header" href="/account/user">Tài khoản</a></li>
         <li><a class="dropdown-item dropdown-item-header" href="#">Đăng xuất</a></li>
       </ul>
     </div>
 
 
-
     <button style="background: none; border: none; cursor: pointer;margin-top:-4px">
-      <a href="/cart" style="">
+      <a href="/account/cart" style="">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4"
           viewBox="0 0 16 16">
           <path
@@ -99,12 +100,16 @@
 </div>
 
 <script>
-  function handleSearch() {
-    const searchInput = document.getElementById('search-input').value.trim();
-    if (searchInput) {
-      window.location.href = `/search?q=${encodeURIComponent(searchInput)}`;
-    } else {
-      alert('Vui long nhap thong tin!');
+    function handleSearch() {
+        const searchInput = document.getElementById('search-input');
+        const searchTerm = searchInput.value.trim();
+
+        if (!searchTerm) {
+            alert('Vui lòng nhập nội dung tìm kiếm!');
+        } else {
+            // Redirect to a new URL with the search term as a query parameter
+            const searchUrl = `https://example.com/search?q=${encodeURIComponent(searchTerm)}`;
+            window.location.href = searchUrl;
+        }
     }
-  }
 </script>

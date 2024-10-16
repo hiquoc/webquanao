@@ -40,7 +40,28 @@ a:active {
 .grid-container-2 img:not(.card-img-top) {
   height: 60px;
 }
+.cart-icon {
+  position: absolute;
+  top: 33%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  font-size: 36px; 
+  color: white; 
+  background-color: #c21e1e; 
+  border-radius: 50%; 
+  width: 80px; 
+  height: 80px; 
+  display: none; 
+  transition: opacity 0.3s; 
+  text-align: center;
+  line-height: 80px;
+}
 
+/* Show icon only when hovering over the main image */
+.card-img-top:hover + .cart-icon {
+  display: block;
+  opacity: 1; 
+}
 /******************* Header *******************/
 
 .ul-header .header-items {
@@ -185,3 +206,23 @@ a:active {
 }
 /******************* product *******************/
 
+.btn-dang-giao {
+  background-color: #ff5722;
+  color: #fff;
+  margin-top: 30px;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-dang-giao:hover {
+  background-color: #e64a19; /* Darker shade for hover effect */
+}

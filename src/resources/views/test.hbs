@@ -1,88 +1,42 @@
 <!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show More Images Example</title>
-    <style>
-        #image-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .image {
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 150px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div id="image-container">
-        <!-- Rendered images will go here -->
-    </div>
-
-    <button id="prev-button" style="display: none;">Previous</button>
-    <button id="next-button">Next</button>
-
-    <script id="image-template" type="text/x-handlebars-template">
-        <div class="image">
-            <img src="{{src}}" alt="{{alt}}" style="width: 100%;">
-            <p>{{alt}}</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider in HTML CSS and JavaScript | CodingNepal</title>
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="slider-wrapper">
+        <button id="prev-slide" class="slide-button material-symbols-rounded">
+          chevron_left
+        </button>
+        <ul class="image-list">
+          <img class="image-item" src="images/img-1.jpg" alt="img-1" />
+          <img class="image-item" src="images/img-2.jpg" alt="img-2" />
+          <img class="image-item" src="images/img-3.jpg" alt="img-3" />
+          <img class="image-item" src="images/img-4.jpg" alt="img-4" />
+          <img class="image-item" src="images/img-5.jpg" alt="img-5" />
+          <img class="image-item" src="images/img-6.jpg" alt="img-6" />
+          <img class="image-item" src="images/img-7.jpg" alt="img-7" />
+          <img class="image-item" src="images/img-8.jpg" alt="img-8" />
+          <img class="image-item" src="images/img-9.jpg" alt="img-9" />
+          <img class="image-item" src="images/img-10.jpg" alt="img-10" />
+        </ul>
+        <button id="next-slide" class="slide-button material-symbols-rounded">
+          chevron_right
+        </button>
+      </div>
+      <div class="slider-scrollbar">
+        <div class="scrollbar-track">
+          <div class="scrollbar-thumb"></div>
         </div>
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
-    <script>
-        // Sample array of images
-        const images = [
-            { src: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Image+1', alt: 'Image 1' },
-            { src: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Image+2', alt: 'Image 2' },
-            { src: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Image+3', alt: 'Image 3' },
-            { src: 'https://via.placeholder.com/150/FFFF00/FFFFFF?text=Image+4', alt: 'Image 4' },
-            { src: 'https://via.placeholder.com/150/FF00FF/FFFFFF?text=Image+5', alt: 'Image 5' },
-            { src: 'https://via.placeholder.com/150/00FFFF/FFFFFF?text=Image+6', alt: 'Image 6' },
-            { src: 'https://via.placeholder.com/150/000000/FFFFFF?text=Image+7', alt: 'Image 7' }
-        ];
-
-        let currentIndex = 0; // Start at the beginning
-        const imagesPerPage = 4; // Number of images to show per click
-
-        // Function to render images
-        function renderImages() {
-            const container = document.getElementById('image-container');
-            container.innerHTML = ''; // Clear the container
-
-            const nextImages = images.slice(currentIndex, currentIndex + imagesPerPage);
-            const template = Handlebars.compile(document.getElementById('image-template').innerHTML);
-            nextImages.forEach(image => {
-                container.innerHTML += template(image);
-            });
-
-            // Update button visibility
-            document.getElementById('prev-button').style.display = currentIndex > 0 ? 'inline-block' : 'none';
-            document.getElementById('next-button').style.display = currentIndex + imagesPerPage < images.length ? 'inline-block' : 'none';
-        }
-
-        // Event listener for the "Next" button
-        document.getElementById('next-button').addEventListener('click', () => {
-            if (currentIndex + imagesPerPage < images.length) {
-                currentIndex += 3; // Show next 3 images
-                renderImages();
-            }
-        });
-
-        // Event listener for the "Previous" button
-        document.getElementById('prev-button').addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex = Math.max(0, currentIndex - imagesPerPage); // Show the first 4 images
-                renderImages();
-            }
-        });
-
-        // Load initial images
-        renderImages();
-    </script>
-</body>
+      </div>
+    </div>
+  </body>
 </html>
