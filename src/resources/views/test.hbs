@@ -1,42 +1,46 @@
-<!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Slider in HTML CSS and JavaScript | CodingNepal</title>
-    <!-- Google Fonts Link For Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="slider-wrapper">
-        <button id="prev-slide" class="slide-button material-symbols-rounded">
-          chevron_left
-        </button>
-        <ul class="image-list">
-          <img class="image-item" src="images/img-1.jpg" alt="img-1" />
-          <img class="image-item" src="images/img-2.jpg" alt="img-2" />
-          <img class="image-item" src="images/img-3.jpg" alt="img-3" />
-          <img class="image-item" src="images/img-4.jpg" alt="img-4" />
-          <img class="image-item" src="images/img-5.jpg" alt="img-5" />
-          <img class="image-item" src="images/img-6.jpg" alt="img-6" />
-          <img class="image-item" src="images/img-7.jpg" alt="img-7" />
-          <img class="image-item" src="images/img-8.jpg" alt="img-8" />
-          <img class="image-item" src="images/img-9.jpg" alt="img-9" />
-          <img class="image-item" src="images/img-10.jpg" alt="img-10" />
-        </ul>
-        <button id="next-slide" class="slide-button material-symbols-rounded">
-          chevron_right
-        </button>
-      </div>
-      <div class="slider-scrollbar">
-        <div class="scrollbar-track">
-          <div class="scrollbar-thumb"></div>
-        </div>
-      </div>
+<div class="container mt-5">
+  <h2>Tìm kiếm sản phẩm</h2>
+  <form id="fileUploadForm">
+    <div class="form-group">
+      <label for="fileInput">Hình ảnh:</label>
+      <input type="file" id="fileInput" class="form-control-file" accept="image/*">
     </div>
-  </body>
-</html>
+    <button type="submit"
+      style="background-color: #131313; color: #fff; margin-top: 30px; width: 170px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">
+      Tìm kiếm
+    </button>
+  </form>
+  <div id="fileInfo" class="mt-3"></div>
+</div>
+
+<script>
+  document.getElementById('fileUploadForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the form from submitting
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+
+    if (fileInput.files.length > 0) { // Check if a file was chosen
+      const file = fileInput.files[0]; // Access the first file
+      
+      // Display file info
+      fileInfo.innerHTML = `
+        <p>File Name: ${file.name}</p>
+        <p>File Size: ${(file.size / 1024).toFixed(2)} KB</p>
+        <p>File Type: ${file.type}</p>
+      `;
+
+      // Create a FileReader to read the file
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Create an image element and set its source to the file
+        const img = document.createElement('img');
+        img.src = e.target.result; // Set the source to the file data
+        img.style.maxWidth = '200px'; // Limit the image size
+        fileInfo.appendChild(img); // Append the image to the fileInfo div
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    } else {
+      fileInfo.innerHTML = '<p>No file chosen.</p>'; // No file selected
+    }
+  });
+</script>

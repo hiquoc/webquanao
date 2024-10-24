@@ -1,0 +1,191 @@
+<div class="flex-container"
+    style="display: flex;flex-direction: row;font-size: 30px;gap:50px;text-align: center;padding: 0px 50px 0 50px; ">
+    <div class="flex-item-left" style="padding: 10px; flex: 70%;">
+        <div style="display: flex;align-items:center;justify-content:space-between">
+            <h1 style="text-align: left;font-weight:bold ;">Quản lý tài khoản</h1>
+        </div>
+
+
+
+        <table class="table" style="border: 1px solid black; border-collapse: collapse; font-size: 20px;">
+            <thead>
+                <tr>
+                    <th scope="col" style="border: 1px solid black;">ID</th>
+                    <th scope="col" style="border: 1px solid black;">Tên tài khoản</th>
+                    <th scope="col" style="border: 1px solid black;">Thông tin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid black;">1</td>
+                    <td style="border: 1px solid black;">username1</td>
+                    <td
+                        style="display:flex; justify-content:space-evenly; box-sizing: border-box; border-bottom: none;">
+                        <div style="display:flex;gap:10px">
+                            <button data-bs-toggle="modal" data-bs-target="#xemModal"
+                                style="background-color: #4caf50; color: #fff; width: 120px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">
+                                Xem
+                            </button>
+                            <div class="modal fade" id="xemModal" tabindex="-1" aria-labelledby="xemModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content"
+                                        style="position:relative; display: flex; align-items: center; justify-content: center;">
+                                        <span class="closexx"
+                                            style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">
+                                            &times;
+                                        </span>
+                                        <div
+                                            style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
+                                            <h1 style="margin-bottom: 20px; text-align: center; color: #333;">Thông tin
+                                                tài khoản</h1>
+                                            <div style="margin-bottom: 10px;">
+                                                <label for="username"
+                                                    style="display: block; margin-bottom: 5px; color: #555; font-size: 18px; text-align: left;">
+                                                    Tên tài khoản
+                                                </label>
+                                                <input type="text" id="username" name="username" disabled
+                                                    value="username1"
+                                                    style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                                            </div>
+
+                                            <div
+                                                style="margin-bottom: 10px;display:flex;justify-content:space-between;gap:10px">
+                                                <div>
+                                                    <label for="ho"
+                                                        style="display: block; margin-bottom: 5px; color: #555; font-size: 18px; text-align: left;">
+                                                        Họ
+                                                    </label>
+                                                    <input type="text" id="ho" name="ho" value="Dang" disabled
+                                                        style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                                                </div>
+                                                <div>
+                                                    <label for="ten"
+                                                        style="display: block; margin-bottom: 5px; color: #555; font-size: 18px; text-align: left;">
+                                                        Tên
+                                                    </label>
+                                                    <input type="text" id="ten" name="ten" value="Huy" disabled
+                                                        style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                                                </div>
+                                            </div>
+
+                                            <div style="margin-bottom: 15px;">
+                                                <label for="email"
+                                                    style="display: block; margin-bottom: 5px; color: #555; font-size: 18px; text-align: left;">
+                                                    Email
+                                                </label>
+                                                <input type="email" id="email" name="email" value="dasd@gmail.com"
+                                                    disabled
+                                                    style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                                            </div>
+                                            <div style="margin-bottom: 15px;">
+                                                <label for="so dien thoai"
+                                                    style="display: block; margin-bottom: 5px; color: #555; font-size: 18px; text-align: left;">
+                                                    Số điện thoại
+                                                </label>
+                                                <input type="text" id="so dien thoai" name="sdt" value="0891231234"
+                                                    disabled
+                                                    style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="statusButton" data-bs-toggle="modal" data-bs-target="#xoaModal"
+                                style="background-color: #fd1818; color: #fff; width: 120px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">
+                                Xóa
+                            </button>
+                        </div>
+                        <div class="modal fade" id="xoaModal" tabindex="-1" aria-labelledby="xoaModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content"
+                                    style="position:relative; display: flex; align-items: center; justify-content: center;">
+                                    <span class="closex"
+                                        style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">
+                                        &times;
+                                    </span>
+                                    <form id="changePasswordForm" method="post"
+                                        style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
+                                        <h1 style="margin-bottom: 20px; text-align: center; color: #333;">Bạn có
+                                            chắc là muốn xóa tài khoản này?</h1>
+                                        <input style="display: none;" name="sanpham" value="sanpham1"></p>
+                                        <div style="display:flex;justify-content:space-between;gap:10px">
+                                            <button type="button" class="button-27 closex"
+                                                style="margin-top: 15px; background-color: #000000; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; font-size: 16px;">
+                                                Hủy
+                                            </button>
+                                            <button type="submit" class="button-27"
+                                                style="margin-top: 15px; background-color: #fd1818; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; font-size: 16px;">
+                                                Xác nhận
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="flex-item-right" style="padding: 10px;flex: 30%;">
+        <div
+            style="background: #fff; padding-top: 0px;padding-top:0; border-radius: 0 15px 15px 0; width: 100%; box-shadow: none;margin-top:56px">
+            <form id="searchForm" style="display: flex; width: 100%;">
+                <input type="text" name="tentaikhoan" placeholder="Nhập tên tài khoản"
+                    style="flex: 1; padding: 12px; border: 1px solid #000000; border-right: none; border-radius: 0px; font-size: 16px;">
+                <button type="submit"
+                    style="padding: 12px; border: 1px solid #000000; border-left: none; border-radius: 0px; background-color: #f1f1f1; font-size: 16px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="16" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16" style="cursor: pointer;">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                </button>
+            </form>
+
+            <div style="display: flex;  justify-content: right;">
+                <a class="button-27" href="/admin" style="background-color: #ff5722; color: #fff;margin-top: 15px;
+                     width: 100%; display: flex; align-items: center; justify-content: center; border: none;">
+                    Quản lý sản phẩm
+                </a>
+            </div>
+            <div style="display: flex;  justify-content: right;">
+                <a class="button-27" href="/admin/san-pham-moi" style="background-color: #000000; color: #fff;margin-top: 15px;
+                     width: 100%; display: flex; align-items: center; justify-content: center; border: none;">
+                    Đăng sản phẩm mới
+                </a>
+            </div>
+            <span style="display: block; border-bottom: 1px solid rgb(0, 0, 0); margin-top: 15px;"></span>
+
+            <div style="display: flex;  justify-content: right;">
+                <a class="button-27" href="/admin/tai-khoan" style="background-color: #ff5722; color: #fff;margin-top: 15px;
+                     width: 100%; display: flex; align-items: center; justify-content: center; border: none;">
+                    Quản lý tài khoản
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const closeButtons = document.getElementsByClassName('closex');
+        Array.from(closeButtons).forEach(function (closeButton) {
+            closeButton.onclick = function () {
+                $('#xoaModal').modal('hide');
+            }
+        });
+
+        const xemButtons = document.getElementsByClassName('closexx');
+        Array.from(xemButtons).forEach(function (xemButton) {
+            xemButton.onclick = function () {
+                $('#xemModal').modal('hide');
+            }
+        });
+    });
+</script>

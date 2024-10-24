@@ -14,7 +14,9 @@ a:active {
   text-decoration: none;
   color: inherit;
 }
-
+.grid-item .card-body{
+  height: 120px;
+}
 .card-body p{
   font-size: 16px;
   text-align: center;

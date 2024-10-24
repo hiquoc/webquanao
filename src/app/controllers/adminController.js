@@ -1,6 +1,13 @@
-class accountController{
+class adminController{
     main(req,res){
         res.render('admin/main')
     }
+    upload(req,res){
+        res.render('admin/upload')
+    }
+    account(req,res){
+        res.render('admin/account')
+    }
+
 }
-module.exports = new accountController();
+module.exports = new adminController();
