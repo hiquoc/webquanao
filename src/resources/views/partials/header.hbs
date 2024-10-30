@@ -54,17 +54,19 @@
   </ul>
 
   <div style="display: flex; align-items: center; gap: 15px;">
-    <div style="position: relative;">
-      <input id="search-input" type="search" placeholder="Bạn đang tìm gì?" aria-label="Search"
-        style="width: 200px; padding: 5px 30px 5px 10px; border-radius: 0px; border: 1px solid #ccc; outline: none;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-        viewBox="0 0 16 16"
-        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
-        onclick="handleSearch()">
-        <path
-          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-      </svg>
-    </div>
+    <form action="/search" id="form-search">
+      <div style="position: relative;">
+        <input id="search-input" type="search" placeholder="Bạn đang tìm gì?" aria-label="Search" name="text"
+          style="width: 200px; padding: 5px 30px 5px 10px; border-radius: 0px; border: 1px solid #ccc; outline: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+          viewBox="0 0 16 16"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+          onclick="handleSearch()">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+        </svg>
+      </div>
+    </form>
 
 
     <div class="dropdown">
@@ -100,16 +102,15 @@
 </div>
 
 <script>
-    function handleSearch() {
-        const searchInput = document.getElementById('search-input');
-        const searchTerm = searchInput.value.trim();
-
-        if (!searchTerm) {
-            alert('Vui lòng nhập nội dung tìm kiếm!');
-        } else {
-            // Redirect to a new URL with the search term as a query parameter
-            const searchUrl = `https://example.com/search?q=${encodeURIComponent(searchTerm)}`;
-            window.location.href = searchUrl;
-        }
+  function handleSearch() {
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim();
+    const form=document.getElementById('form-search');
+    if (!searchTerm) {
+      alert('Vui lòng nhập nội dung tìm kiếm!');
+    } else {
+      // Redirect to a new URL with the search term as a query parameter
+      form.submit()
     }
+  }
 </script>
