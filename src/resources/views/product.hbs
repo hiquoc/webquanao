@@ -12,7 +12,8 @@
             <img class="small-img" style="height: 60px; margin-right: 5px;"
                 src="https://4menshop.com/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784-slide-products-6703add86ebc3.jpg">
             {{!-- <img class="small-img" style="height: 60px; margin-right: 5px;"
-                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg"> --}}
+                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+            --}}
         </div>
     </div>
 
@@ -20,7 +21,8 @@
     <div class="flex-item-left" style="padding: 10px; flex: 55%;">
         <div>
             <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
-                 font-family: 'Arial', sans-serif; padding-right: 25px; font-size: 22px; font-weight: bold;">
+                 font-family: 'Arial', sans-serif; padding-right: 25px; font-size: 22px; font-weight: bold;"
+                class="ten-sp" id="123">
                 Quần Kaki Slimfit Trơn
             </p>
             <div style="display: flex;margin-top:10px;justify-content:space-between">
@@ -84,18 +86,31 @@
                     <option>4</option>
                 </select>
             </div>
-            <div style="display: flex; justify-content: space-between;">
-                <button class="button-27"
-                    style="background-color: #ff5722; color: #fff; margin-top: 40px; width: 48%; display: flex; align-items: center; justify-content: center;"
-                    role="button">
-                    <i class="bi bi-cart4" style="margin-right: 8px; font-size: 20px;"></i> Thêm vào giỏ
-                </button>
-                <button class="button-27 " 
-                    style="margin-top: 40px; width: 48%; display: flex; align-items: center; justify-content: center;"
-                    role="button">
-                    <i class="bi bi-credit-card" style="margin-right: 8px; font-size: 20px;"></i> Mua ngay
-                </button>
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <!-- Form for Adding to Cart -->
+                <form id="them-form" style="width: 48%;">
+                    <input type="hidden" id="type" name="type" value="them">
+                    <input type="hidden" id="cart-product-id" name="product">
+                    <input type="hidden" id="cart-size" name="size">
+                    <input type="hidden" id="cart-quantity" name="quantity">
+                    <button type="button" class="button-27" style="background-color: #ff5722; color: #fff; width: 100%;"
+                        onclick="them()">
+                        <i class="bi bi-cart4" style="margin-right: 8px; font-size: 20px;"></i> Thêm vào giỏ
+                    </button>
+                </form>
+
+                <!-- Form for Immediate Purchase -->
+                <form id="mua-form" style="width: 48%;">
+                    <input type="hidden" id="type" name="type" value="mua">
+                    <input type="hidden" id="buy-product-id" name="product">
+                    <input type="hidden" id="buy-size" name="size">
+                    <input type="hidden" id="buy-quantity" name="quantity">
+                    <button type="button" class="button-27" style="width: 100%;" onclick="mua()">
+                        <i class="bi bi-credit-card" style="margin-right: 8px; font-size: 20px;"></i> Mua ngay
+                    </button>
+                </form>
             </div>
+
 
 
             <p style="margin-top: 20px; cursor: pointer; color: #05a; position: relative; text-align: left;"
@@ -128,7 +143,7 @@
 
 <div class="grid-container"
     style="display: flex; overflow: hidden; gap: 10px; padding: 0; position: relative; width: 100%; ">
-    
+
     <!-- Previous Button -->
     <button class="prev-btn1"
         style="position: absolute; top: 50%; left: 0px; background: rgba(255, 255, 255, 0); border: none; cursor: pointer; font-size: 36px; transform: translateY(-50%); z-index: 10; padding: 10px;">
@@ -136,7 +151,8 @@
     </button>
 
     <!-- Container for the product cards -->
-    <div class="product-cards1" style="display: flex; transition: transform 0.3s ease; padding: 0; margin: 0 50px 0 50px;">
+    <div class="product-cards1"
+        style="display: flex; transition: transform 0.3s ease; padding: 0; margin: 0 50px 0 50px;">
         <!-- Example Product Cards -->
         <a class="grid-item grid-item1" href="/product/one" style="flex: 0 0 25%; box-sizing: border-box;">
             <div class="card" style="width: auto; position: relative;">
@@ -149,7 +165,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -169,7 +185,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -189,7 +205,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -209,7 +225,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -230,7 +246,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -250,7 +266,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -270,7 +286,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -290,7 +306,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -319,7 +335,7 @@
 
 <div class="grid-container"
     style="display: flex; overflow: hidden; gap: 10px; padding: 0; position: relative; width: 100%; ">
-    
+
     <!-- Previous Button -->
     <button class="prev-btn2"
         style="position: absolute; top: 50%; left: 0px; background: rgba(255, 255, 255, 0); border: none; cursor: pointer; font-size: 36px; transform: translateY(-50%); z-index: 10; padding: 10px;">
@@ -327,7 +343,8 @@
     </button>
 
     <!-- Container for the product cards -->
-    <div class="product-cards2" style="display: flex; transition: transform 0.3s ease; padding: 0; margin: 0 50px 0 50px;">
+    <div class="product-cards2"
+        style="display: flex; transition: transform 0.3s ease; padding: 0; margin: 0 50px 0 50px;">
         <!-- Example Product Cards -->
         <a class="grid-item grid-item2" href="/product/one" style="flex: 0 0 25%; box-sizing: border-box;">
             <div class="card" style="width: auto; position: relative;">
@@ -340,7 +357,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -349,7 +366,7 @@
                 </div>
             </div>
         </a>
-        
+
         <a class="grid-item grid-item2" href="/product/one" style="flex: 0 0 25%; box-sizing: border-box;">
             <div class="card" style="width: auto; position: relative;">
                 <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
@@ -361,27 +378,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
-                        src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
-                </div>
-                <div class="card-body" style="padding: 10px;">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color: red; font-weight: bold;">425.000₫</p>
-                </div>
-            </div>
-        </a>
-        <a class="grid-item grid-item2" href="/product/one" style="flex: 0 0 25%; box-sizing: border-box;">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
-                    class="card-img-top" alt="..." style="width: 100%; height: 350px; object-fit: cover;"
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top: 10px;">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
-                        src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
-                    <img class="small-img" style="height: 60px; margin-right: 5px;"
-                        src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -401,7 +398,27 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
+                        src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
+                </div>
+                <div class="card-body" style="padding: 10px;">
+                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
+                    <p class="card-text" style="color: red; font-weight: bold;">425.000₫</p>
+                </div>
+            </div>
+        </a>
+        <a class="grid-item grid-item2" href="/product/one" style="flex: 0 0 25%; box-sizing: border-box;">
+            <div class="card" style="width: auto; position: relative;">
+                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                    class="card-img-top" alt="..." style="width: 100%; height: 350px; object-fit: cover;"
+                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
+                <div style="margin-top: 10px;">
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
+                        src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
+                        src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -422,7 +439,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -442,7 +459,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -462,7 +479,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -482,7 +499,7 @@
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
                     <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
-                    <img class="small-img"  style="height: 60px; margin-right: 5px;"
+                    <img class="small-img" style="height: 60px; margin-right: 5px;"
                         src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
                 </div>
                 <div class="card-body" style="padding: 10px;">
@@ -557,12 +574,7 @@
         }
     }
 </script>
-<script>
-    function highlightButton(button) {
-        document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-    }
-</script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Select all card elements
@@ -602,4 +614,57 @@
         });
     });
 
+</script>
+<script>
+    function highlightButton(button) {
+        document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    }
+    function laySize() {
+        const activeButton = document.querySelector('.btn.btn-light.active');
+        return activeButton ? activeButton.textContent : null;
+    }
+
+    function them() {
+        const size = laySize();
+        const quantity = document.getElementById('so-luong').value;
+        if (!size) {
+            alert('Vui lòng chọn size');
+            return;
+        }
+
+        const sp = document.querySelector('.ten-sp');
+        const spId = sp ? sp.id : null;
+
+        // Set values for the add-to-cart form
+        
+        document.getElementById('cart-product-id').value = spId;
+        document.getElementById('cart-size').value = size;
+        document.getElementById('cart-quantity').value = quantity;
+
+        // Submit the add-to-cart form
+        document.getElementById('them-form').submit();
+    }
+
+    function mua() {
+        const size = laySize();
+        const quantity = document.getElementById('so-luong').value;
+
+        if (!size) {
+            alert('Vui lòng chọn size');
+            return;
+        }
+
+        const sp = document.querySelector('.ten-sp');
+        const spId = sp ? sp.id : null;
+
+        // Set values for the buy-now form
+        
+        document.getElementById('buy-product-id').value = spId;
+        document.getElementById('buy-size').value = size;
+        document.getElementById('buy-quantity').value = quantity;
+
+        // Submit the buy-now form
+        document.getElementById('mua-form').submit();
+    }
 </script>

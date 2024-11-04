@@ -9,6 +9,9 @@ function route(app) {
   })
   app.use('/account',accountRouter)
   app.use('/admin',adminRouter)
+  app.use('/search',(req,res)=>{
+    res.render('search', {text:req.query.text})
+  })
   app.use('/test', (req,res)=>{res.render('test')});
   app.get('/', (req, res) => {
     res.render('home');

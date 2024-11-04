@@ -1,0 +1,313 @@
+<div class="flex-container"
+    style="display: flex;flex-direction: row;font-size: 30px;gap:30px;text-align: center;padding: 20px 50px 0 50px; ">
+    <div class="flex-item-left" style="padding: 10px; flex: 70%;">
+        <div style="display: flex;align-items: center;justify-content:space-between">
+            <h2
+                style="text-align: left;font-weight:600px;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; color: #333;">
+                {{text}}</h2>
+            <div style="display: flex; align-items: center;margin-right:6px;margin-bottom:6px">
+                <div class="dropdown" style="">
+                    <button id="sortDropdown"
+                        style="background-color: #ffffff; border: 1px solid #000000; border-radius: px; color: #151515; padding: 10px; font-family: 'Arial', sans-serif; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%;"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sắp xếp: Mặc định
+                    </button>
+                    <ul class="dropdown-menu"
+                        style="position: absolute; left: 50%; transform: translate(-50%, 0); text-align: center; margin-top: 5px; padding: 0; border-radius: 5px; background-color: #ffffff; border: 1px solid #ddd; z-index: 1000; width: auto;">
+                        <li style="list-style: none;"><a class="dropdown-item" href="#"
+                                onclick="changeSort('Thấp đến cao')"
+                                style="padding: 10px 15px; display: block; text-decoration: none; color: #333;">Thấp
+                                đến
+                                cao</a></li>
+                        <li style="list-style: none;"><a class="dropdown-item" href="#"
+                                onclick="changeSort('Cao đến thấp')"
+                                style="padding: 10px 15px; display: block; text-decoration: none; color: #333;">Cao
+                                đến
+                                thấp</a></li>
+                        <li style="list-style: none;"><a class="dropdown-item" href="#" onclick="changeSort('Mặc định')"
+                                style="padding: 10px 15px; display: block; text-decoration: none; color: #333;">Mặc
+                                định</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <div class="grid-container-2" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                <a class="grid-item" href="/product/one">
+                    <div class="card" style="width: auto;">
+                        <img src="https://4menshop.com/images/thumbs/2024/10/ao-thun-in-theu-heritage-sau-lung-form-loose-at157-mau-be-18736-slide-products-6706af8b3db9a.jpg"
+                            class="card-img-top" alt="..."
+                            data-original-src="https://4menshop.com/images/thumbs/2024/10/ao-thun-in-theu-heritage-sau-lung-form-loose-at157-mau-be-18736-slide-products-6706af8b3db9a.jpg">
+                        <div style="margin-top:10px">
+                            <img class="small-img" 
+                                src="https://4menshop.com/images/thumbs/2024/10/ao-thun-in-theu-heritage-sau-lung-form-loose-at157-mau-be-18736-slide-products-6706af8e9e719.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2024/10/ao-thun-in-theu-heritage-sau-lung-form-loose-at157-mau-be-18737-slide-products-6700032e5b536.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2024/10/ao-thun-in-theu-heritage-sau-lung-form-loose-at157-mau-be-18737-slide-products-6700032f37e0b.jpg">
+
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Áo Thun In Thêu Heritage Sau Lưng Form Loose</p>
+                            <p class="card-text" style="color:red">
+                                425.000 ₫</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="grid-item" href="">
+                    <div class="card" style="width: auto;">
+                        <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                            class="card-img-top" alt="..."
+                            data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                        <div style="margin-top:10px">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2022/06/-16908-slide-products-62b161ed8af8e.png">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2022/06/-16910-slide-products-62b1629eb1b4a.png">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2022/06/-16911-slide-products-62b1630932309.png">
+
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Áo Sơ Mi Trơn Tay Ngắn Form Regular</p>
+                            <p class="card-text" style="color:red">
+                                425.000 ₫</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="grid-item" href="">
+                    <div class="card" style="width: auto;">
+                        <img src="https://4menshop.com/images/thumbs/2022/06/-16899-slide-products-62b12ae365226.JPG"
+                            class="card-img-top" alt="..."
+                            data-original-src="https://4menshop.com/images/thumbs/2022/06/-16899-slide-products-62b12ae365226.JPG">
+                        <div style="margin-top:10px">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg">
+
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Áo Sơ Mi Trơn Tay Dài Form Regular</p>
+                            <p class="card-text" style="color:red">
+                                425.000 ₫</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="grid-item" href="">
+                    <div class="card" style="width: auto;">
+                        <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                            class="card-img-top" alt="..."
+                            data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                        <div style="margin-top:10px">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
+                            <p class="card-text" style="color:red">
+                                425.000 ₫</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="grid-item" href="">
+                    <div class="card" style="width: auto;">
+                        <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                            class="card-img-top" alt="..."
+                            data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                        <div style="margin-top:10px">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
+                            <p class="card-text" style="color:red">
+                                425.000 ₫</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="grid-item" href="">
+                    <div class="card" style="width: auto;">
+                        <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                            class="card-img-top" alt="..."
+                            data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                        <div style="margin-top:10px">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+                            <img class="small-img"
+                                src="https://4menshop.com/cache/image/63/images/thumbs/2024/10/quan-tay-sidetab-1-ben-form-regular-qt062-18784.jpg">
+
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
+                            <p class="card-text" style="color:red">
+                                425.000 ₫</p>
+                        </div>
+                    </div>
+                </a>
+                <!-- Add more items as needed -->
+            </div>
+        </div>
+
+
+    </div>
+    <div class="flex-item-left" style="padding: 15px; flex: 30%;  border: 1px solid #ddd;
+     border-radius: 5px; margin-top: 12px; position: sticky; top: 117px; height:fit-content">
+        <div>
+            <h2
+                style="text-align: left; font-size: 20px; color: #000000;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; ">
+                Sản phẩm hot</h2>
+            <span style="display: block; border-bottom: 2px solid rgb(0, 0, 0); margin-top: 5px;"></span>
+        </div>
+        <div>
+
+            <a href="your-link-here" style="text-decoration: none; color: inherit;">
+                <div class="card mb-3"
+                    style="max-width: 540px; height: 100px; margin-top: 20px; overflow: hidden; border: none; background-color: transparent;">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                                class="img-fluid" alt="Image"
+                                style="height: 100px; width: 70px; object-fit: contain; border-radius: 0; border: 2px solid #d0d0d0;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-start"
+                                style="padding: 5px; height: 100px; display: flex; flex-direction: column; justify-content: flex-start;">
+                                <h5 class="card-title"
+                                    style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; margin: 0; text-align: left; font-size: 14px;">
+                                    Áo Sơ Mi Trơn Tay Ngắn Form Regular
+                                </h5>
+                                <p class="card-text" style="margin-top: 10px; text-align: left; font-size: 12px;">
+                                    <span style="color: red;">1,500,000₫</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="your-link-here" style="text-decoration: none; color: inherit;">
+                <div class="card mb-3"
+                    style="max-width: 540px; height: 100px; margin-top: 20px; overflow: hidden; border: none; background-color: transparent;">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="https://4menshop.com/images/thumbs/2024/08/quan-tay-tron-form-slimfit-qt058-mau-den-18346-slide-products-66bc7b4c330bc.jpg"
+                                class="img-fluid" alt="Image"
+                                style="height: 100px; width: 70px; object-fit: contain; border-radius: 0; border: 2px solid #d0d0d0;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-start"
+                                style="padding: 5px; height: 100px; display: flex; flex-direction: column; justify-content: flex-start;">
+                                <h5 class="card-title"
+                                    style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; margin: 0; text-align: left; font-size: 14px;">
+                                    Quần Tây Sidetab 1 Bên Form Regular
+                                </h5>
+                                <p class="card-text" style="margin-top: 10px; text-align: left; font-size: 12px;">
+                                    <span style="color: red;">1,500,000₫</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="your-link-here" style="text-decoration: none; color: inherit;">
+                <div class="card mb-3"
+                    style="max-width: 540px; height: 100px; margin-top: 20px; overflow: hidden; border: none; background-color: transparent;">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="https://4menshop.com/images/thumbs/2022/06/-16899-slide-products-62b12ae365226.JPG"
+                                class="img-fluid" alt="Image"
+                                style="height: 100px; width: 70px; object-fit: contain; border-radius: 0; border: 2px solid #d0d0d0;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-start"
+                                style="padding: 5px; height: 100px; display: flex; flex-direction: column; justify-content: flex-start;">
+                                <h5 class="card-title"
+                                    style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; margin: 0; text-align: left; font-size: 14px;">
+                                    Áo Sơ Mi Trơn Tay Dài Form Regular
+                                </h5>
+                                <p class="card-text" style="margin-top: 10px; text-align: left; font-size: 12px;">
+                                    <span style="color: red;">1,500,000₫</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="your-link-here" style="text-decoration: none; color: inherit;">
+                <div class="card mb-3"
+                    style="max-width: 540px; height: 100px; margin-top: 20px; overflow: hidden; border: none; background-color: transparent;">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="https://4menshop.com/images/thumbs/2023/01/-17768-slide-products-63b56092e0d7c.jpg"
+                                class="img-fluid" alt="Image"
+                                style="height: 100px; width: 70px; object-fit: contain; border-radius: 0; border: 2px solid #d0d0d0;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-start"
+                                style="padding: 5px; height: 100px; display: flex; flex-direction: column; justify-content: flex-start;">
+                                <h5 class="card-title"
+                                    style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; margin: 0; text-align: left; font-size: 14px;">
+                                    Quần Kaki Slimfit Trơn
+                                </h5>
+                                <p class="card-text" style="margin-top: 10px; text-align: left; font-size: 12px;">
+                                    <span style="color: red;">1,500,000₫</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function changeSort(selected) {
+        document.getElementById('sortDropdown').textContent = `Sắp xếp: ${selected}`;
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all card elements
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            const mainImage = card.querySelector('.card-img-top'); // Select the main image for this card
+            const smallImages = card.querySelectorAll('.small-img'); // Select small images for this card
+            const cartIcon = card.querySelector('.cart-icon'); // Select the cart icon for this card
+
+            // Change the main image when hovering over small images
+            smallImages.forEach(image => {
+                image.addEventListener('mouseover', function () {
+                    mainImage.src = this.src; // Change the main image to the hovered small image
+                });
+
+                image.addEventListener('mouseleave', function () {
+                    mainImage.src = mainImage.getAttribute('data-original-src'); // Reset to the original image from data attribute
+                });
+            });
+
+            
+
+        });
+    });
+
+</script>

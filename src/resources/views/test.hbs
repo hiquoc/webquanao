@@ -67,10 +67,11 @@
         // Update the text field with the prediction results
         let clothing_type = data.clothing_type;
         let clothing_color = data.color;
-
+        let tmp=clothing_type+' '+clothing_color;
+        tmp = tmp.replace(/_/g, " ");
         const text = document.getElementById('text');
 
-        text.value = `${clothing_type} ${clothing_color}`; // Set the text field
+        text.value = `${tmp}`; // Set the text field
 
         // Submit the form after setting the text value
         document.getElementById('fileUploadForm').submit();
