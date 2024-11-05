@@ -27,10 +27,41 @@
                                 <option>3</option>
                                 <option>4</option>
                             </select>
-                            <button id="statusButton"
+                            <button id="statusButton" class="madonhang" data-bs-toggle="modal"
+                                data-bs-target="#huyModal"
                                 style="background-color: #ff5722; color: #fff; margin-top: 30px; width: 170px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">
                                 <i class="bi bi-truck" style="margin-right: 8px; font-size: 20px;"></i> Đang giao
                             </button>
+                            <div class="modal fade" id="huyModal" tabindex="-1" aria-labelledby="huyModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content"
+                                        style="position:relative; display: flex; align-items: center; justify-content: center;">
+                                        <span class="closex"
+                                            style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">
+                                            &times;
+                                        </span>
+                                        <form id="huydonhangForm" method="post"
+                                            style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
+                                            <h1 style="margin-bottom: 20px; text-align: center; color: #333;">Bạn có
+                                                chắc là muốn hủy đơn hàng này?</h1>
+
+                                            {{!-- nhap id san pham --}}
+                                            <input style="display: none;" name="id" value="id"></p>
+                                            <div style="display:flex;justify-content:space-between;gap:10px">
+                                                <button type="button" class="button-27 closex"
+                                                    style="margin-top: 15px; background-color: #000000; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; font-size: 16px;">
+                                                    Đóng
+                                                </button>
+                                                <button type="submit" class="button-27"
+                                                    style="margin-top: 15px; background-color: #fd1818; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; font-size: 16px;">
+                                                    Xác nhận
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,26 +109,34 @@
     <div class="flex-item-right" style="padding: 10px;flex: 30%;">
         <div
             style="background: #fff; padding: 0px;padding-top:0; border-radius: 0 15px 15px 0; width: 100%; box-shadow: none;">
-            <h2 style="text-align: left; margin-bottom: 20px;margin-top: 12px ;font-weight:bold ;font-size:22px">Thông
-                tin cá nhân
-            </h2>
-            <div style="margin-bottom: 15px; display: flex; gap: 4%;">
-                <input type="text" id="firstName" placeholder="Nhập họ của bạn"
-                    style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-                <input type="text" id="lastName" placeholder="Nhập tên của bạn"
-                    style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-            </div>
-            <input type="email" id="email" placeholder="Nhập email của bạn"
-                style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;margin-bottom: 15px;">
-            <input type="text" id="phone" placeholder="Nhập sdt của bạn"
-                style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;margin-bottom: 15px;">
-            <div style="display: flex;  justify-content: right;">
-                <button class="button-27"
-                    style="background-color: #ff5722; color: #fff; width: 100%; display: flex; align-items: center; justify-content: center; border: none;"
-                    role="button" data-bs-toggle="modal" data-bs-target="#changepasswordModal">
-                    Đổi mật khẩu
-                </button>
-            </div>
+            <form method="get">
+                <h2 style="text-align: left; margin-bottom: 20px;margin-top: 12px ;font-weight:bold ;font-size:22px">
+                    Thông tin cá nhân
+                </h2>
+                <div style="margin-bottom: 15px; display: flex; gap: 4%;">
+                    <input type="text" name="ho" placeholder="Nhập họ của bạn"
+                        style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                    <input type="text" name="ten" placeholder="Nhập tên của bạn"
+                        style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                </div>
+                <input type="email" name="email" placeholder="Nhập email của bạn"
+                    style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;margin-bottom: 15px;">
+                <input type="text" name="sdt" placeholder="Nhập sdt của bạn"
+                    style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;margin-bottom: 15px;">
+                <div style="display: flex;  justify-content: space-between;gap:10px">
+                    <button class="button-27" type="submit"
+                        style="background-color: #000; color: #fff;  width: 100%; display: flex; align-items: center; justify-content: center; border: none;"
+                        role="button">
+                        Lưu
+                    </button>
+                </div>
+            </form>
+
+            <button class="button-27"
+                style="margin-top:10px;background-color: #ff5722; color: #fff; width: 100%; display: flex; align-items: center; justify-content: center; border: none;"
+                role="button" data-bs-toggle="modal" data-bs-target="#changepasswordModal">
+                Đổi mật khẩu
+            </button>
             <div class="modal fade" id="changepasswordModal" tabindex="-1" aria-labelledby="changepasswordModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -160,47 +199,38 @@
             <span style="display: block; border-bottom: 1px solid rgb(0, 0, 0); margin-top: 5px;"></span>
         </h2>
 
-        <div id="addressInputs" style="display: none;">
+        <form id="addressInputs" style="display: none;">
 
-            <select id="province"
+            <select name="tinh"
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
-                <option>Chọn Tỉnh/Thành phố</option>
+                <option value="TP.HCM">Chọn Tỉnh/Thành phố</option>
             </select>
 
-            <select id="district"
+            <select name="quan"
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
                 <option>Chọn Quận/Huyện</option>
             </select>
 
-            <select id="ward"
+            <select name="phuong"
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
                 <option>Chọn Phường/Xã</option>
             </select>
 
-            <input type="text" id="street" placeholder="Số nhà/ tên đường"
+            <input type="text" name="nha" placeholder="Số nhà/ tên đường"
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 5px;">
             <p style="font-size: 14px; color: #777; margin-top: 2px;">Ví dụ: 33 đường Lê Duẩn</p>
 
-            <input type="text" id="building" placeholder="Ghi chú"
+            <input type="text" name="ghi-chu" placeholder="Ghi chú"
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 5px;">
             <p style="font-size: 14px; color: #777; margin-top: 2px;">Ví dụ: Tên tòa nhà, tầng</p>
 
-
-        </div>
-
-        <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 20px">
-            <button class="button-27"
-                style="background-color: #ff5722; color: #fff;  width: 40%; display: flex; align-items: center; justify-content: center; border: none;"
-                role="button">
-                Hủy
-            </button>
-            <button class="button-27"
-                style="background-color: #000; color: #fff;  width: 40%; display: flex; align-items: center; justify-content: center; border: none;"
+            <button class="button-27" type="submit"
+                style="background-color: #000; color: #fff;  width: 100%; display: flex; align-items: center; justify-content: center; border: none;"
                 role="button">
                 Lưu
             </button>
-        </div>
 
+        </form>
     </div>
 
 </div>
@@ -238,9 +268,17 @@
         }
 
         document.getElementById('closex').onclick = function () {
-            // Trigger Bootstrap's modal hide
             $('#changepasswordModal').modal('hide');
         }
-
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const closeButtons = document.getElementsByClassName('closex');
+        Array.from(closeButtons).forEach(function (closeButton) {
+            closeButton.onclick = function () {
+                $('#huyModal').modal('hide');
+            }
+        });
     });
 </script>

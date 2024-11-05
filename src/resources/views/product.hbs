@@ -42,16 +42,16 @@
                 <p style="margin: 8px 100px 0 0;">Size:</p>
                 <div>
                     <div style="display: flex; justify-content: space-between; gap: 20px">
-                        <button style="width: 100px;" type="button" class="btn btn-light"
-                            onclick="highlightButton(this)">S</button>
-                        <button style="width: 100px;" type="button" class="btn btn-light"
-                            onclick="highlightButton(this)">M</button>
-                        <button style="width: 100px;" type="button" class="btn btn-light"
-                            onclick="highlightButton(this)">L</button>
-                        <button style="width: 100px;" type="button" class="btn btn-light"
-                            onclick="highlightButton(this)">XL</button>
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-size"
+                            onclick="highlightSize(this)">S</button>
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-size"
+                            onclick="highlightSize(this)">M</button>
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-size"
+                            onclick="highlightSize(this)">L</button>
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-size"
+                            onclick="highlightSize(this)">XL</button>
                     </div>
-                    <p style="margin: 10px 60px 0 0;">
+                    <p style="margin: 10px 60px 20px 0;">
                         <a href="#" style="color: #05a;" data-bs-toggle="modal" data-bs-target="#sizeGuideModal">Hướng
                             dẫn chọn size</a>
                     </p>
@@ -77,6 +77,20 @@
 
             </div>
             <div style="display: flex;">
+                <p style="margin: 8px 66px 0 0;">Màu sắc:</p>
+                <div style="display: flex; justify-content: space-between; gap: 20px;align-items:center">
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-color"
+                            onclick="highlightColor(this)">Đen</button>
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-color"
+                            onclick="highlightColor(this)">Trắng</button>
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-color"
+                            onclick="highlightColor(this)">Đỏ</button>
+                        <button style="width: 100px;" type="button" class="btn btn-light btn-color"
+                            onclick="highlightColor(this)">Xanh</button>
+                    </div>
+                
+            </div>
+            <div style="display: flex;">
                 <p style="margin: 40px 62px 0 0;">Số lượng:</p>
                 <select class="form-select" id="so-luong" name="sellist1"
                     style="width: 100px; height: 40px; border: 1px solid #000000; font-size: 16px; border-radius: 0; margin-top: 30px;">
@@ -92,6 +106,7 @@
                     <input type="hidden" id="type" name="type" value="them">
                     <input type="hidden" id="cart-product-id" name="product">
                     <input type="hidden" id="cart-size" name="size">
+                    <input type="hidden" id="cart-color" name="color">
                     <input type="hidden" id="cart-quantity" name="quantity">
                     <button type="button" class="button-27" style="background-color: #ff5722; color: #fff; width: 100%;"
                         onclick="them()">
@@ -104,6 +119,7 @@
                     <input type="hidden" id="type" name="type" value="mua">
                     <input type="hidden" id="buy-product-id" name="product">
                     <input type="hidden" id="buy-size" name="size">
+                    <input type="hidden" id="buy-color" name="color">
                     <input type="hidden" id="buy-quantity" name="quantity">
                     <button type="button" class="button-27" style="width: 100%;" onclick="mua()">
                         <i class="bi bi-credit-card" style="margin-right: 8px; font-size: 20px;"></i> Mua ngay
@@ -616,20 +632,33 @@
 
 </script>
 <script>
-    function highlightButton(button) {
-        document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+    function highlightSize(button) {
+        document.querySelectorAll('.btn-size').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    }
+    function highlightColor(button) {
+        document.querySelectorAll('.btn-color').forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
     }
     function laySize() {
-        const activeButton = document.querySelector('.btn.btn-light.active');
+        const activeButton = document.querySelector('.btn.btn-light.btn-size.active');
+        return activeButton ? activeButton.textContent : null;
+    }
+    function layColor() {
+        const activeButton = document.querySelector('.btn.btn-light.btn-color.active');
         return activeButton ? activeButton.textContent : null;
     }
 
     function them() {
         const size = laySize();
+        const color = layColor();
         const quantity = document.getElementById('so-luong').value;
         if (!size) {
             alert('Vui lòng chọn size');
+            return;
+        }
+        if (!color) {
+            alert('Vui lòng chọn màu');
             return;
         }
 
@@ -640,6 +669,7 @@
         
         document.getElementById('cart-product-id').value = spId;
         document.getElementById('cart-size').value = size;
+        document.getElementById('cart-color').value = color;
         document.getElementById('cart-quantity').value = quantity;
 
         // Submit the add-to-cart form
@@ -648,10 +678,15 @@
 
     function mua() {
         const size = laySize();
+        const color = layColor();
         const quantity = document.getElementById('so-luong').value;
 
         if (!size) {
             alert('Vui lòng chọn size');
+            return;
+        }
+        if (!color) {
+            alert('Vui lòng chọn màu');
             return;
         }
 
@@ -662,6 +697,7 @@
         
         document.getElementById('buy-product-id').value = spId;
         document.getElementById('buy-size').value = size;
+        document.getElementById('buy-color').value = color;
         document.getElementById('buy-quantity').value = quantity;
 
         // Submit the buy-now form
