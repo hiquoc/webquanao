@@ -14,22 +14,24 @@
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
                     <input type="text" name="ten" placeholder="Tên sản phẩm"
                         style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
-                        required>
+                        maxlength="55" required>
                 </div>
 
                 <div style="margin-bottom: 15px; display: flex; justify-content: space-between;align-items:center">
                     <input type="text" name="price" placeholder="Giá"
                         style="width: 28%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
-                        required>
+                        required maxlength="10" pattern="\d*" title="Chỉ nhận số (không quá 10 chữ số)">
+
                     <select class="form-select" id="category" name="danhmuc"
                         style="width: 150px; height: 49.6px; border: 1px solid #000000; font-size: 16px; border-radius: 0; margin-top: 0px; box-sizing: border-box;"
-                        required>
+                        required >
                         <option value="">Danh mục</option>
-                        <option value="ao">Áo</option>
-                        <option value="quan">Quần</option>
-                        <option value="khac">Khác</option>
+                        {{#each category}}
+                        <option value="{{category_id}}">{{name}}</option>
+                        {{/each}}
                     </select>
-                    <select class="livesearch" name="color[]" multiple required
+
+                    <select class="livesearch" name="color" multiple required
                         style=" width: 250px; border: 1px solid #000000; font-size: 16px; border-radius: 0; box-sizing: border-box;">
                         <option value="Trắng">Trắng</option>
                         <option value="Đen">Đen</option>
@@ -68,7 +70,7 @@
                         style="text-align: left; margin-bottom: 20px; margin-top: 20px; font-weight:bold; font-size:22px;">
                         Hình ảnh sản phẩm
                     </h2>
-                    <input type="file" id="product-images" name="product-images" accept="image/*" multiple
+                    <input type="file" id="product-images" name="product-images" accept="image/*" multiple required
                         style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
                         onchange="previewImages()">
                 </div>
@@ -155,6 +157,11 @@
         if (files.length === 0) {
             return; // Exit if no files selected
         }
+        if (files.length > 4) {
+            alert('Nhiều nhất là 4 files ảnh.');
+            document.getElementById('product-images').value = ''; // Clear the input
+            return;
+        }
 
         // Set the first image as the large image
         const firstFile = files[0];
@@ -196,15 +203,18 @@
 <script>
     document.getElementById('product-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        const formData = new FormData(this); // Automatically includes all form fields, including files
-
-        fetch('/upload', {
+        const formData = new FormData(this);
+        fetch('', {
             method: 'POST',
             body: formData
         })
-            .then(response => response.text())
-            .then(result => alert(result))  // Handle the response from the server
-            .catch(error => console.error('Error:', error));
+            .then(response => {
+                alert('Đăng thành công.');
+                window.location.href = '/admin';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi khi đăng sản phẩm.');
+            });
     });
-
 </script>

@@ -2,141 +2,101 @@
     style="display: flex;flex-direction: row;font-size: 30px;gap:50px;text-align: center;padding: 0px 50px 0 50px; ">
     <div class="flex-item-left" style="padding: 10px; flex: 70%;">
         <h1 style="text-align: left;font-weight:bold ;">Giỏ hàng của bạn</h1>
-        <p style="text-align: left;margin-bottom:20px; font-size: 20px; ">Tổng cộng 2
-            (món đồ) 620,000₫</p>
+        <p style="text-align: left;margin-bottom:20px; font-size: 20px; ">Tổng cộng {{#if nop}} {{formatPrice nop}}
+            {{else}} 0 {{/if}}
+            (món đồ) {{#if pop}} {{formatPrice pop}}₫ {{else}} 0₫ {{/if}}</p>
+        {{#if note}}
+        <p style="text-align: left;margin-top:-10px; font-size: 20px; font-weight:bold">{{note}}</p>
+        {{/if}}
+        {{#each products}}
         <div style="height: 250px; border: 1px solid #000; overflow: hidden;margin-bottom:30px;">
             <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwjk8b58pejfe3.webp"
-                        class="img-fluid " alt="..." style="height: 100%; width: auto; object-fit: cover;">
-                </div>
+                <a href="/product/{{this.product_id}}"
+                    class="col-md-4 d-flex align-items-center justify-content-center">
+                    <img src="../../../../{{this.mainImage}}" class="img-fluid " alt="..."
+                        style="width: 267px;aspect-ratio: 1/1;object-fit: cover;">
+                </a>
                 <div class="col-md-8" style="">
                     <div class="card-body don-hang"
                         style="height: 250px; padding: 20px; position: relative;background-color:white">
                         <div style="position: absolute; right: 16px; top: 12px; cursor: pointer;">
-                            <img src="https://img.icons8.com/ios-filled/50/000000/delete-sign.png" alt="Close" id="statusButton" data-bs-toggle="modal" data-bs-target="#xoaModal"
+                            <img src="https://img.icons8.com/ios-filled/50/000000/delete-sign.png" alt="Close"
+                                id="statusButton" data-bs-toggle="modal" data-bs-target="#xoaModal{{this.id}}"
                                 style="width: 20px; height: 20px;">
-                                 <div class="modal fade" id="xoaModal" tabindex="-1" aria-labelledby="xoaModalLabel"
-                                aria-hidden="true">
+                            <div class="modal fade" id="xoaModal{{this.id}}" tabindex="-1"
+                                aria-labelledby="xoaModal{{this.id}}Label" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content"
                                         style="position:relative; display: flex; align-items: center; justify-content: center;">
-                                        <span class="closex"
+                                        <span class="closex" data-id="{{this.id}}"
                                             style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">
                                             &times;
                                         </span>
-                                        <form id="changePasswordForm" method="post"
+                                        <div
                                             style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
                                             <h1 style="margin-bottom: 20px; text-align: center; color: #333;">Bạn có
                                                 chắc là muốn xóa sản phẩm này?</h1>
-                                            <input style="display: none;" name="sanpham" value="sanpham2"></p>
-                                            <div style="display:flex;justify-content:space-between;gap:10px;padding:0 20px 0 20px">
-                                                <button type="button" class="button-27 closex"
+                                            <div
+                                                style="display:flex;justify-content:space-between;gap:10px;padding:0 20px 0 20px">
+                                                <button type="button" class="button-27 closex" data-id="{{this.id}}"
                                                     style="margin-top: 15px; background-color: #000000; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width:170px; font-size: 16px;">
                                                     Hủy
                                                 </button>
-                                                <button type="submit" class="button-27"
+                                                <button type="submit" class="button-27 huy-btn" data-id="{{this.id}}"
                                                     style="margin-top: 15px; background-color: #fd1818; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width:170px; font-size: 16px;">
                                                     Xác nhận
                                                 </button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <p
                             style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-weight:bold;padding-right: 25px;">
-                            Áo Sơ mi tay ngắn Classic Casual vải Oxford 1 túi - Olderister
+                            {{this.name}}
                         </p>
-                        <p style="">Size: L</p>
-                        <p style="margin-top: -5px; color: red; font-weight: 600; ">
-                            320,000₫</p>
-                        <select class="form-select" id="so-luong" name="sellist1" disabled
-                            style="width: 100px; height: 40px; border: 1px solid #000000; font-size: 16px; border-radius: 0;margin-top:30px">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div style="height: 250px; border: 1px solid #000; overflow: hidden;;margin-bottom:30px">
-            <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ly34bo078xjtc5@resize_w450_nl.webp"
-                        class="img-fluid " alt="..." style="height: 100%; width: auto; object-fit: cover;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body don-hang"
-                        style="height: 250px; padding: 20px; position: relative;background-color:white">
-                        <div style="position: absolute; right: 16px; top: 12px; cursor: pointer;">
-                            <img src="https://img.icons8.com/ios-filled/50/000000/delete-sign.png" alt="Close" id="statusButton" data-bs-toggle="modal" data-bs-target="#xoaModal"
-                                style="width: 20px; height: 20px;">
-                                 <div class="modal fade" id="xoaModal" tabindex="-1" aria-labelledby="xoaModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content"
-                                        style="position:relative; display: flex; align-items: center; justify-content: center;">
-                                        <span class="closex"
-                                            style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">
-                                            &times;
-                                        </span>
-                                        <form id="changePasswordForm" method="post"
-                                            style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
-                                            <h1 style="margin-bottom: 20px; text-align: center; color: #333;">Bạn có
-                                                chắc là muốn xóa sản phẩm này?</h1>
-                                            <input style="display: none;" name="sanpham" value="sanpham2"></p>
-                                            <div style="display:flex;justify-content:space-between;gap:10px;padding:0 20px 0 20px">
-                                                <button type="button" class="button-27 closex"
-                                                    style="margin-top: 15px; background-color: #000000; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width:170px; font-size: 16px;">
-                                                    Hủy
-                                                </button>
-                                                <button type="submit" class="button-27"
-                                                    style="margin-top: 15px; background-color: #fd1818; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width:170px; font-size: 16px;">
-                                                    Xác nhận
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                        <div style="display: flex;gap:50px">
+                            <p style="">Size: {{this.size}}</p>
+                            <p style="">Màu: {{this.color}}</p>
                         </div>
-                        <p
-                            style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-weight:bold;padding-right: 25px;">
-                            Áo sơ mi SilenceStandard Eco Denim/ Blank
-                        </p>
-                        <p style="">Size: M</p>
                         <p style="margin-top: -5px; color: red; font-weight: 600; ">
-                            300,000₫</p>
+                            {{formatPrice this.price}}₫</p>
                         <select class="form-select" id="so-luong" name="sellist1" disabled
                             style="width: 100px; height: 40px; border: 1px solid #000000; font-size: 16px; border-radius: 0;margin-top:30px">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            <option {{#ifEqual this.number 1 }}selected{{/ifEqual}}>1</option>
+                            <option {{#ifEqual this.number 2 }}selected{{/ifEqual}}>2</option>
+                            <option {{#ifEqual this.number 3 }}selected{{/ifEqual}}>3</option>
+                            <option {{#ifEqual this.number 4 }}selected{{/ifEqual}}>4</option>
                         </select>
-
                     </div>
                 </div>
             </div>
         </div>
+        {{/each}}
+        <form id="huy-form" method="POST" action="/account/cart/xoa" style="display:none">
+            <input id="huy-id" type="hidden" name="id" value="">
+        </form>
     </div>
 
 
     <div class="flex-item-right" style="padding: 10px;flex: 30%;">
 
-        <h1 style="text-align: left;font-weight:bold ;font-size:22px;margin-top:103px">Tóm Tắt Đơn Hàng
+        <h1 style="text-align: left;font-weight:bold ;font-size:22px;margin-top:103px">Tóm Tắt Giỏ Hàng
             <span style="display: block; border-bottom: 2px solid rgb(0, 0, 0); margin-top: 5px;"></span>
         </h1>
         <div style="margin:30px 0 20px 0">
             <div style="display:flex;justify-content:space-between">
-                <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">2 sản phẩm</p>
-                <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">620.000d</p>
+                {{#if nop}}
+                <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">{{formatPrice nop}} sản phẩm</p>
+                {{else}}
+                <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">0 sản phẩm</p>
+                {{/if}}
+                {{#if pop}}
+                <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">{{formatPrice pop}}₫</p>
+                {{else}}
+                <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">0₫</p>
+                {{/if}}
             </div>
             <div style="display:flex;justify-content:space-between">
                 <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">Giao hàng</p>
@@ -147,11 +107,11 @@
                 <p style="text-align: left;margin-bottom:5px;margin-top:15px; font-size: 17px;font-weight:bold; ">Tổng
                 </p>
                 <p style="text-align: left;margin-bottom:5px;margin-top:15px; font-size: 17px;font-weight:bold; ">
-                    2.000.000d</p>
+                    {{#if pop}} {{formatPrice pop}}₫ {{else}} 0₫ {{/if}}</p>
             </div>
 
         </div>
-        
+
         <button class="button-27 "
             style="margin-top: 40px; display: flex; align-items: center; justify-content: center;margin-top: 70px"
             role="button"><a href="/account/checkout">
@@ -162,10 +122,25 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const closeButtons = document.getElementsByClassName('closex');
+
         Array.from(closeButtons).forEach(function (closeButton) {
             closeButton.onclick = function () {
-                $('#xoaModal').modal('hide');
+                // Get the modal ID from the button's 'data-id' or the button's own id
+                const modalId = `#xoaModal${closeButton.getAttribute('data-id')}`;
+
+                // Hide the modal dynamically
+                $(modalId).modal('hide');
             }
+        });
+        const huybtn = document.querySelectorAll('.huy-btn');
+        const huyform = document.getElementById('huy-form');
+        const huyid = document.getElementById('huy-id');
+        huybtn.forEach(function (button) {
+            button.onclick = function () {
+                const id = button.getAttribute('data-id');
+                huyid.value = id;
+                huyform.submit();
+            };
         });
     });
 </script>

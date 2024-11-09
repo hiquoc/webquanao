@@ -1,21 +1,11 @@
-const accountRouter=require('./account')
-const adminRouter=require('./admin')
-function route(app) {
-  app.use('/product', (req,res)=>{
-    res.render('product')
-  })
-  app.use('/nam', (req,res)=>{
-    res.render('nam')
-  })
-  app.use('/account',accountRouter)
-  app.use('/admin',adminRouter)
-  app.use('/search',(req,res)=>{
-    res.render('search', {text:req.query.text})
-  })
-  app.use('/test', (req,res)=>{res.render('test')});
-  app.get('/', (req, res) => {
-    res.render('home');
-  });
-}
+const express = require('express');
+const router=express.Router();
+let mainController = require('../app/controllers/mainController')
 
-module.exports = route;
+router.get('/new', mainController.new);
+router.get('/search', mainController.search);
+router.get('/:category', mainController.category);
+
+router.get('/', mainController.main);
+
+module.exports = router;

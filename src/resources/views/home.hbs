@@ -7,87 +7,26 @@
     <div class="grid-container" style="display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;">
-        <a class="grid-item" href="/product/one" >
+        {{#each hots}}
+        <a class="grid-item" href="/product/{{this.product_id}}" >
             <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                <img src="{{this.mainImage}}" style="border-bottom:#d6d5d5 1px solid"
                     class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                    data-original-src="{{this.mainImage}}">
                 <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
                 <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2022/06/-16908-slide-products-62b161ed8af8e.png"
+                    {{#each this.otherImages}}
+                    <img src="{{this}}" style="border:#f1f0f0 1px solid"
                         class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2022/06/-16910-slide-products-62b1629eb1b4a.png"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2022/06/-16911-slide-products-62b1630932309.png"
-                        class="small-img">
+                    {{/each}}
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Áo Sơ Mi Trơn Tay Ngắn Form Regular</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
+                    <p class="card-text">{{this.name}}</p>
+                    <p class="card-text" style="color:red">{{formatPrice this.price}}₫</p>
                 </div>
             </div>
         </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/images/thumbs/2024/08/quan-tay-tron-form-slimfit-qt058-mau-den-18346-slide-products-66bc7b4c330bc.jpg"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/images/thumbs/2024/08/quan-tay-tron-form-slimfit-qt058-mau-den-18346-slide-products-66bc7b4c330bc.jpg">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/08/quan-tay-lung-thun-form-regular-qt060-18669-slide-products-66bc7849a4642.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/05/quan-tay-lung-thun-form-regular-qt059-mau-kem-18528-slide-products-66501d7ac7851.jpg"
-                        class="small-img">
-                    {{!-- <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img"> --}}
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/images/thumbs/2022/06/-16899-slide-products-62b12ae365226.JPG"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/images/thumbs/2022/06/-16899-slide-products-62b12ae365226.JPG">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Áo Sơ Mi Trơn Tay Dài Form Regular</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/images/thumbs/2023/01/-17768-slide-products-63b56092e0d7c.jpg"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/images/thumbs/2023/01/-17768-slide-products-63b56092e0d7c.jpg">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2023/01/-17777-slide-products-63bbf07e4cac7.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2023/01/-17778-slide-products-63bbf11e11523.jpg"
-                        class="small-img">
-                        {{!-- <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                            class="small-img"> --}}
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Kaki Slimfit Trơn</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-        <!-- Add more items as needed -->
+        {{/each}}
     </div>
 
 
@@ -101,95 +40,33 @@
     border: 1px solid #696969;">
 
 <div>
-    <h1 style="text-align: center;;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; color: #333;">Quần áo
-        nam</h1>
+    <h1 style="text-align: center;;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; color: #333;">Áo thun</h1>
 </div>
 <div>
     <div class="grid-container" style="display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;">
-        <a class="grid-item" href="/product/one">
+        {{#each ao_thun}}
+        <a class="grid-item" href="/product/{{this.product_id}}" >
             <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                <img src="{{this.mainImage}}" style="border-bottom:#d6d5d5 1px solid"
                     class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                    data-original-src="{{this.mainImage}}">
                 <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
                 <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
+                    {{#each this.otherImages}}
+                    <img src="{{this}}" style="border:#f1f0f0 1px solid"
                         class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/10/ao-so-mi-tay-ngan-2-tui-theu-4m-form-regular-sm164-18795-slide-products-6708f848057e1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
+                    {{/each}}
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
+                    <p class="card-text">{{this.name}}</p>
+                    <p class="card-text" style="color:red">{{formatPrice this.price}}₫</p>
                 </div>
             </div>
         </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-
-        <!-- Add more items as needed -->
+        {{/each}}
+        
     </div>
 
 
@@ -202,100 +79,75 @@
     border: 1px solid #696969;">
 
 <div>
-    <h1 style="text-align: center;;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; color: #333;">Quần áo
-        nữ</h1>
+    <h1 style="text-align: center;;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; color: #333;">Quần tây</h1>
 </div>
 <div>
     <div class="grid-container" style="display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;">
-        <a class="grid-item" href="/product/one">
+        {{#each quan_tay}}
+        <a class="grid-item" href="/product/{{this.product_id}}" >
             <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
+                <img src="{{this.mainImage}}" style="border-bottom:#d6d5d5 1px solid"
                     class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
+                    data-original-src="{{this.mainImage}}">
                 <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
                 <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
+                    {{#each this.otherImages}}
+                    <img src="{{this}}" style="border:#f1f0f0 1px solid"
                         class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/10/ao-so-mi-tay-ngan-2-tui-theu-4m-form-regular-sm164-18795-slide-products-6708f848057e1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
+                    {{/each}}
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
+                    <p class="card-text">{{this.name}}</p>
+                    <p class="card-text" style="color:red">{{formatPrice this.price}}₫</p>
                 </div>
             </div>
         </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
-        <a class="grid-item" href="/product/one">
-            <div class="card" style="width: auto; position: relative;">
-                <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png"
-                    class="card-img-top" alt="..."
-                    data-original-src="https://4menshop.com/cache/image/300x400/images/thumbs/2022/06/ao-so-mi-regular-mr-friendly-asm092_2_small-16907.png">
-                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
-                <div style="margin-top:10px">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-trang-kem-18720-slide-products-66f526dfea2d1.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-bien-18722-slide-products-66f527ce14af8.jpg"
-                        class="small-img">
-                    <img src="https://4menshop.com/images/thumbs/2024/09/ao-so-mi-vai-oxford-tron-signature-form-regular-sm157-mau-xanh-den-18723-slide-products-66f5286c8b689.jpg"
-                        class="small-img">
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Quần Tây Sidetab 1 Bên Form Regular QT062 Màu Be</p>
-                    <p class="card-text" style="color:red">425.000 ₫</p>
-                </div>
-            </div>
-        </a>
+        {{/each}}
 
         <!-- Add more items as needed -->
+    </div>
+</div>
+<hr style="margin: 40px 0;
+    width: 99vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #696969;">
+
+<div>
+    <h1 style="text-align: center;;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; color: #333;">Áo sơ mi</h1>
+</div>
+<div>
+    <div class="grid-container" style="display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;">
+        {{#each ao_so_mi}}
+        <a class="grid-item" href="/product/{{this.product_id}}" >
+            <div class="card" style="width: auto; position: relative;">
+                <img src="{{this.mainImage}}" style="border-bottom:#d6d5d5 1px solid"
+                    class="card-img-top" alt="..."
+                    data-original-src="{{this.mainImage}}">
+                <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
+                <div style="margin-top:10px">
+                    {{#each this.otherImages}}
+                    <img src="{{this}}" style="border:#f1f0f0 1px solid"
+                        class="small-img">
+                    {{/each}}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{this.name}}</p>
+                    <p class="card-text" style="color:red">{{formatPrice this.price}}₫</p>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+        
     </div>
 
 
 </div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Select all card elements

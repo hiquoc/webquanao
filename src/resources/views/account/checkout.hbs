@@ -1,26 +1,31 @@
 <div>
     <div style="text-align:center">
         <h2 style=" ;font-weight:bold ;">Thanh toán</h2>
-        <p style="text-align:center">(2 món) 620,000đ</p>
+        <p style="text-align:center">{{#if nop}} {{formatPrice nop}}
+            {{else}} 0 {{/if}}
+            (món đồ) {{#if pop}} {{formatPrice pop}}₫ {{else}} 0₫ {{/if}}</p>
     </div>
     <div class="flex-container"
         style="display: flex;flex-direction: row;font-size: 30px;gap:50px;text-align: center;padding: 20px 50px 0 50px; ">
-        <div class="flex-item-left"
+        <form class="flex-item-left" method="post" id="form-checkout"
             style="padding: 10px; flex: 70%; display: flex; align-items: center; justify-content: center;">
             <div
                 style="background: #fff; padding: 40px;padding-top:0; border-radius: 0 15px 15px 0; width: 100%; box-shadow: none;">
                 <h2 style="text-align: left; margin-bottom: 20px; ;font-weight:bold ;font-size:22px">Thông tin liên hệ
                 </h2>
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
-                    <input type="text" id="firstName" placeholder="Nhập họ của bạn"
-                        style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-                    <input type="text" id="lastName" placeholder="Nhập tên của bạn"
-                        style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                    <input type="text" id="hovaten" name="hovaten" placeholder="Nhập họ và tên của bạn"
+                        value="{{account.fullname}}"
+                        style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                    {{#each cartItems}}
+                    <input style="display: none;" name="id[]" value="{{this.id}}">
+                    {{/each}}
                 </div>
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
-                    <input type="email" id="email" placeholder="Nhập email của bạn"
+                    <input type="email" id="email" name="email" placeholder="Nhập email của bạn"
+                        value="{{account.email}}"
                         style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-                    <input type="text" id="phone" placeholder="Nhập sdt của bạn"
+                    <input type="text" id="sdt" name="sdt" placeholder="Nhập sdt của bạn" value="{{account.phone}}"
                         style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
                 </div>
 
@@ -29,33 +34,69 @@
 
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
                     <div style="flex: 1;">
-                        <select id="province"
+                        <select id="tinh" required name="tinh"
                             style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-                            <option>Chọn Tỉnh/Thành phố</option>
+                            <option value="">Chọn Tỉnh/Thành phố</option>
+                            <option value="TP Hồ Chí Minh" {{#ifEqual address.tinh "TP Hồ Chí Minh"
+                                }}selected{{/ifEqual}}>TP Hồ Chí Minh</option>
                         </select>
                     </div>
                     <div style="flex: 1;">
-                        <select id="district"
-                            style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-                            <option>Chọn Quận/Huyện</option>
+                        <select name="quan" required
+                            style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
+                            <option value="">Chọn Quận/Huyện</option>
+                            <option value="Quận 1" {{#ifEqual address.quan "Quận 1" }}selected{{/ifEqual}}>Quận 1</option>
+                            <option value="Quận 2" {{#ifEqual address.quan "Quận 2" }}selected{{/ifEqual}}>Quận 2</option>
+                            <option value="Quận 3" {{#ifEqual address.quan "Quận 3" }}selected{{/ifEqual}}>Quận 3</option>
+                            <option value="Quận 4" {{#ifEqual address.quan "Quận 4" }}selected{{/ifEqual}}>Quận 4</option>
+                            <option value="Quận 5" {{#ifEqual address.quan "Quận 5" }}selected{{/ifEqual}}>Quận 5</option>
+                            <option value="Quận 6" {{#ifEqual address.quan "Quận 6" }}selected{{/ifEqual}}>Quận 6</option>
+                            <option value="Quận 7" {{#ifEqual address.quan "Quận 7" }}selected{{/ifEqual}}>Quận 7</option>
+                            <option value="Quận 8" {{#ifEqual address.quan "Quận 8" }}selected{{/ifEqual}}>Quận 8</option>
+                            <option value="Quận 9" {{#ifEqual address.quan "Quận 9" }}selected{{/ifEqual}}>Quận 9</option>
+                            <option value="Quận 10" {{#ifEqual address.quan "Quận 10" }}selected{{/ifEqual}}>Quận 10</option>
+                            <option value="Quận 11" {{#ifEqual address.quan "Quận 11" }}selected{{/ifEqual}}>Quận 11</option>
+                            <option value="Quận 12" {{#ifEqual address.quan "Quận 12" }}selected{{/ifEqual}}>Quận 12</option>
+                            <option value="Quận Bình Thạnh" {{#ifEqual address.quan "Quận Bình Thạnh" }}selected{{/ifEqual}}>Quận
+                                Bình Thạnh</option>
+                            <option value="Quận Phú Nhuận" {{#ifEqual address.quan "Quận Phú Nhuận" }}selected{{/ifEqual}}>Quận Phú
+                                Nhuận</option>
+                            <option value="Quận Gò Vấp" {{#ifEqual address.quan "Quận Gò Vấp" }}selected{{/ifEqual}}>Quận Gò Vấp
+                            </option>
+                            <option value="Quận Tân Bình" {{#ifEqual address.quan "Quận Tân Bình" }}selected{{/ifEqual}}>Quận Tân
+                                Bình</option>
+                            <option value="Quận Tân Phú" {{#ifEqual address.quan "Quận Tân Phú" }}selected{{/ifEqual}}>Quận Tân Phú
+                            </option>
+                            <option value="Quận Thủ Đức" {{#ifEqual address.quan "Quận Thủ Đức" }}selected{{/ifEqual}}>Quận Thủ Đức
+                            </option>
+                            <option value="Huyện Bình Chánh" {{#ifEqual address.quan "Huyện Bình Chánh" }}selected{{/ifEqual}}>Huyện
+                                Bình Chánh</option>
+                            <option value="Huyện Cần Giờ" {{#ifEqual address.quan "Huyện Cần Giờ" }}selected{{/ifEqual}}>Huyện Cần
+                                Giờ</option>
+                            <option value="Huyện Củ Chi" {{#ifEqual address.quan "Huyện Củ Chi" }}selected{{/ifEqual}}>Huyện Củ Chi
+                            </option>
+                            <option value="Huyện Hóc Môn" {{#ifEqual address.quan "Huyện Hóc Môn" }}selected{{/ifEqual}}>Huyện Hóc
+                                Môn</option>
+                            <option value="Huyện Nhà Bè" {{#ifEqual address.quan "Huyện Nhà Bè" }}selected{{/ifEqual}}>Huyện Nhà Bè
+                            </option>
                         </select>
                     </div>
                 </div>
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
                     <div style="flex: 1;">
-                        <select id="ward"
-                            style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-                            <option>Chọn Phường/Xã</option>
-                        </select>
+                        <input type="phuong" name="phuong" placeholder="Phường/ Xã" required value="{{address.phuong}}"
+                            style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 5px;">
+                        <p style="font-size: 14px; color: #777; margin-top: 2px;">Ví dụ: Tăng Nhơn Phú A</p>
                     </div>
                     <div style="flex: 1;">
-                        <input type="text" id="street" placeholder="Số nhà/ tên đường"
+                        <input type="text" id="street" name="nha" placeholder="Số nhà/ tên đường" required
+                            value="{{address.nha}}"
                             style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
                         <p style="margin-top: 5px; font-size: 14px; color: #777;">Ví dụ: 33 đường Lê Duẩn</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <input type="text" id="building" placeholder="Ghi chú"
+                    <input type="text" id="building" name="ghichu" placeholder="Ghi chú" value="{{address.ghichu}}"
                         style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
                     <p style="margin-top: 5px; font-size: 14px; color: #777;">Ví dụ: Tên tòa nhà, tầng</p>
                 </div>
@@ -65,24 +106,48 @@
                         role="button">
                         Hủy
                     </button>
-                    <button class="button-27"
+                    <button class="button-27" type="submit" id="info-button"
                         style="background-color: #000; color: #fff;  width: 27%; display: flex; align-items: center; justify-content: center; border: none;"
                         role="button">
                         Xác nhận
                     </button>
                 </div>
+            </div>
+        </form>
+        <div class="modal fade" id="alertModal" style="display: none;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content"
+                    style="position:relative; display: flex; align-items: center; justify-content: center;">
+                    <span class="closexxx"
+                        style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">&times;</span>
+                    <div
+                        style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
+                        <p id="alert-text"
+                            style="margin-bottom:-20px; text-align: center; color: #333;font-size:20px;color:red">Có lỗi
+                        </p>
 
-
-
+                    </div>
+                    <button type="submit" class="button-27 closexxx"
+                        style="margin-bottom: 30px; background-color: #010101; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width:170px; font-size: 16px;">
+                        Xác nhận
+                    </button>
+                </div>
             </div>
         </div>
-
         <div class="flex-item-right" style="padding: 10px;flex: 30%;">
             <h1 style="text-align: left;font-weight:bold ;font-size:22px;">Giỏ hàng của bạn</h1>
             <div style="margin:30px 0 20px 0">
                 <div style="display:flex;justify-content:space-between">
-                    <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">2 sản phẩm</p>
-                    <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">2.000.000d</p>
+                    {{#if nop}}
+                    <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">{{formatPrice nop}} sản phẩm</p>
+                    {{else}}
+                    <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">0 sản phẩm</p>
+                    {{/if}}
+                    {{#if pop}}
+                    <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">{{formatPrice pop}}₫</p>
+                    {{else}}
+                    <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">0₫</p>
+                    {{/if}}
                 </div>
                 <div style="display:flex;justify-content:space-between">
                     <p style="text-align: left;margin-bottom:5px; font-size: 17px; ">Giao hàng</p>
@@ -100,19 +165,19 @@
                     <p style="text-align: left;margin-bottom:5px;margin-top:15px; font-size: 17px;font-weight:bold; ">
                         Tổng</p>
                     <p style="text-align: left;margin-bottom:5px;margin-top:15px; font-size: 17px;font-weight:bold; ">
-                        2.000.000d</p>
+                       {{#if pop}} {{formatPrice pop}}₫ {{else}} 0₫ {{/if}}</p>
                 </div>
 
             </div>
             <span style="display: block; border-bottom: 2px solid rgb(0, 0, 0); margin-top: 5px;"></span>
             <div>
-                <a href="your-link-here" style="text-decoration: none; color: inherit;">
+                {{#each cartItems}}
+                <a href="/product/{{this.product_id}}" style="text-decoration: none; color: inherit;">
                     <div class="card mb-3"
                         style="max-width: 540px; height: 100px; margin-top: 20px; overflow: hidden; border: none; background-color: transparent;">
                         <div class="row g-0 h-100">
                             <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwjk8b58pejfe3.webp"
-                                    class="img-fluid" alt="Image"
+                                <img src="../../../../{{this.mainImage}}" class="img-fluid" alt="Image"
                                     style="height: 100px; width: 70px; object-fit: fill; border-radius: 0; border: 2px solid #d0d0d0;">
                             </div>
                             <div class="col-md-8">
@@ -120,41 +185,93 @@
                                     style="padding: 5px; height: 100px; display: flex; flex-direction: column; justify-content: flex-start;">
                                     <h5 class="card-title"
                                         style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; margin: 0; text-align: left; font-size: 14px;">
-                                        Áo Sơ mi tay ngắn Classic Casual vải Oxford 1 túi - Olderister
+                                        {{this.name}}
                                     </h5>
                                     <p class="card-text" style="margin-top: 10px; text-align: left; font-size: 12px;">
-                                        <span style="color: red;">320,000₫</span>
+                                        <span style="color: red;">
+                                            {{formatPricePerUnit this.price this.number}}
+                                            {{#compare this.number ">" 1}}
+                                            x{{this.number}}
+                                            {{/compare}}
+                                        </span>
+
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </a>
-                <a href="your-link-here" style="text-decoration: none; color: inherit;">
-                    <div class="card mb-3"
-                        style="max-width: 540px; height: 100px; margin-top: 20px; overflow: hidden; border: none; background-color: transparent;">
-                        <div class="row g-0 h-100">
-                            <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ly34bo078xjtc5@resize_w450_nl.webp"
-                                    class="img-fluid" alt="Image"
-                                    style="height: 100px; width: 70px; object-fit: fill; border-radius: 0; border: 2px solid #d0d0d0;">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body text-start"
-                                    style="padding: 5px; height: 100px; display: flex; flex-direction: column; justify-content: flex-start;">
-                                    <h5 class="card-title"
-                                        style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; margin: 0; text-align: left; font-size: 14px;">
-                                        Áo sơ mi SilenceStandard Eco Denim/ Blank
-                                    </h5>
-                                    <p class="card-text" style="margin-top: 10px; text-align: left; font-size: 12px;">
-                                        <span style="color: red;">300,000₫</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                {{/each}}
+
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const info = document.getElementById('info-button');
+        const alerttext = document.getElementById("alert-text")
+        const closeButtons = document.querySelectorAll('.closexxx');
+        const form=document.getElementById("form-checkout")
+        closeButtons.forEach(function (button) {
+            button.onclick = function () {
+                $('#alertModal').modal('hide');
+            };
+        });
+        info.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (!check()) {
+                $('#alertModal').modal('show');
+            } else {
+                form.submit();
+            }
+        })
+        function check(){
+            const accounts={{{accounts}}}
+            const hovaten = document.getElementById("hovaten");
+            if (hovaten.value == '') {
+                alerttext.innerHTML = "Họ và tên không được để trống!";
+                return false;
+            } else if (containsOnlyText(hovaten.value) == false) {
+                alerttext.innerHTML = "Họ và tên chỉ được chứa chữ cái!";
+                return false;
+            }
+            //So dien thoai
+            const sdt = document.getElementById("sdt");
+            if (sdt.value == '') {
+                alerttext.innerHTML = "Số điện thoại không được để trống!";
+                return false;
+            }
+            else if (sdt.value.length > 11 || sdt.value.length < 7) {
+                alerttext.innerHTML = "Số điện thoại không hợp lệ!";
+                return false;
+            } else if (containsOnlyNumbers(sdt.value) == false) {
+
+                alerttext.innerHTML = "Số điện thoại chỉ được chứa chữ số!";
+                return false;
+            }
+            else if (accounts.some(obj => obj.phone === sdt.value) == true) {
+                alerttext.innerHTML = "Số điện thoại đã được sử dụng để đăng kí!";
+                return false;
+            }
+            //email
+            const email = document.getElementById("email");
+            if (email.value == '') {
+                alerttext.innerHTML = "Email không được để trống!";
+                return false;
+            }
+            else if (accounts.some(obj => obj.email === email.value) == true) {
+                alerttext.innerHTML = "Email đã được sử dụng để đăng kí!";
+                return false;
+            }
+            function containsOnlyText(str) {
+                return /^[a-zA-Z\s]+$/.test(str);
+            }
+            function containsOnlyNumbers(str) {
+                return /^\d+$/.test(str);
+            }
+            return true;
+            
+        }
+    })
+</script>

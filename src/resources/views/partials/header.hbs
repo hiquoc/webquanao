@@ -2,25 +2,23 @@
   style="position:fixed;top:0;z-index:1000;box-shadow:0 2px 5px rgba(0, 0, 0, 0.1);display:flex;justify-content:flex-start;align-items:center;padding:10px 100px;background-color:rgb(245, 245, 245);width:100%;">
 
   <div style="margin-right: auto;">
-    <h1 style="margin: 0;cursor: pointer;font-weight:600"><a href="/">Trang chủ</a></h1>
+    <h1 style="margin: 0;cursor: pointer;font-weight:bold"><a href="/">Trang chủ</a></h1>
   </div>
 
   <ul class="ul-header"
     style="display: flex; align-items: center; margin: 0 auto; gap: 30px; list-style-type: none; font-weight: 400;">
-    <li class="header-items">Hàng mới về</li>
+    <li class="header-items"><a class="dropdown-item dropdown-item-header" href="/new?sort=moi-nhap">Hàng mới về</a></li>
     <li class="header-items">
       <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
           aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer;">
-          Đồ nam
+          Áo
         </button>
         <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item dropdown-item-header" href="/nam">Quần áo nam</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Áo sơ mi</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Áo thun</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Áo khoác</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Quần dài</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Quần đùi</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/ao-so-mi">Áo sơ mi</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/ao-thun">Áo thun</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/ao-polo">Áo polo</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/ao-khoac">Áo khoác</a></li>
         </ul>
       </div>
     </li>
@@ -28,12 +26,13 @@
       <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
           aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer;">
-          Đồ nữ
+          Quần
         </button>
         <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton2">
-          <li><a class="dropdown-item dropdown-item-header" href="#">Áo</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Quần</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Váy</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/quan-tay">Quần tây</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/quan-kaki">Quần kaki</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/quan-jeans">Quần jeans</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/quan-short">Quần short</a></li>
         </ul>
       </div>
     </li>
@@ -44,13 +43,11 @@
           Phụ kiện
         </button>
         <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton3">
-          <li><a class="dropdown-item dropdown-item-header" href="#">Áo</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Quần</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="#">Váy</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/tui">Túi</a></li>
+          <li><a class="dropdown-item dropdown-item-header" href="/giay">Giày</a></li>
         </ul>
       </div>
     </li>
-    <li class="header-items">Khác</li>
   </ul>
 
   <div style="display: flex; align-items: center; gap: 15px;">
@@ -80,11 +77,20 @@
         </svg>
       </button>
       <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton4">
+        {{#if user}}
+        <!-- If user is logged in -->
+        <li><a class="dropdown-item dropdown-item-header" href="/account/user">{{user.username}}</a></li>
+        {{#if user.admin}}
+        <li><a class="dropdown-item dropdown-item-header" href="/admin">Quản lý</a></li>
+        {{/if}}
+        <li><a class="dropdown-item dropdown-item-header" href="/account/logout">Đăng xuất</a></li>
+        {{else}}
+        <!-- If user is not logged in -->
         <li><a class="dropdown-item dropdown-item-header" href="/account/login">Đăng nhập</a></li>
         <li><a class="dropdown-item dropdown-item-header" href="/account/signup">Đăng kí</a></li>
-        <li><a class="dropdown-item dropdown-item-header" href="/account/user">Tài khoản</a></li>
-        <li><a class="dropdown-item dropdown-item-header" href="#">Đăng xuất</a></li>
+        {{/if}}
       </ul>
+
     </div>
 
 
@@ -105,7 +111,7 @@
   function handleSearch() {
     const searchInput = document.getElementById('search-input');
     const searchTerm = searchInput.value.trim();
-    const form=document.getElementById('form-search');
+    const form = document.getElementById('form-search');
     if (!searchTerm) {
       alert('Vui lòng nhập nội dung tìm kiếm!');
     } else {

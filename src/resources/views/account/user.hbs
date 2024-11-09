@@ -2,129 +2,120 @@
     style="display: flex;flex-direction: row;font-size: 30px;gap:50px;text-align: center;padding: 0px 50px 0 50px; ">
     <div class="flex-item-left" style="padding: 10px; flex: 70%;">
         <h1 style="text-align: left;font-weight:bold ;">Đơn hàng</h1>
-
+        {{#ifEqual length 0 }}
+        <p style="text-align: left;margin-top:10px; font-size: 20px">Bạn chưa thanh toán đơn hàng nào!</p>
+        {{/ifEqual}}
+        {{#each products}}
         <div style="height: 250px; border: 1px solid #000; overflow: hidden;margin-bottom:30px;">
             <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <img src="https://down-vn.img.susercontent.com/file/74e6c2637e0684dfea7c888ed177b829@resize_w450_nl.webp"
-                        class="img-fluid " alt="..." style="height: 100%; width: auto; object-fit: cover;">
-                </div>
+                <a href="/product/{{this.product_id}}"
+                    class="col-md-4 d-flex align-items-center justify-content-center">
+                    <img src="../../../../{{this.mainImage}}" class="img-fluid " alt="..."
+                        style="width: 267px;aspect-ratio: 1/1;object-fit: cover;">
+                </a>
                 <div class="col-md-8" style="">
                     <div class="card-body don-hang"
                         style="height: 250px; padding: 20px; position: relative;background-color:white">
                         <p
                             style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-weight:bold;padding-right: 25px;">
-                            Áo thun nam Caprisun ngắn tay vải cotton cổ bo tròn
+                            {{this.name}}
                         </p>
-                        <p style="">Size: L</p>
-                        <p style="margin-top: -5px; color: red; font-weight: 600; ">
-                            250,000₫</p>
+                        <div style="display: flex;gap:50px">
+                            <p style="">Size: {{this.size}}</p>
+                            <p style="">Màu: {{this.color}}</p>
+                        </div>
+
+                        <div style="display:flex;justify-content:space-between;">
+                            <p style="margin-top: -5px; color: red; font-weight: 600; ">
+                                {{formatPrice this.price}}₫</p>
+                            <p
+                                style="margin-top: 0px; font-weight: 100; font-family: 'Arial', sans-serif; font-size: 12px; font-style: italic; ">
+                                {{this.ngay}}</p>
+                        </div>
+
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <select class="form-select" id="so-luong" name="sellist1" disabled
                                 style="width: 100px; height: 40px; border: 1px solid #000000; font-size: 16px; border-radius: 0; margin-top: 30px; box-sizing: border-box;">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <option {{#ifEqual this.number 1 }}selected{{/ifEqual}}>1</option>
+                                <option {{#ifEqual this.number 2 }}selected{{/ifEqual}}>2</option>
+                                <option {{#ifEqual this.number 3 }}selected{{/ifEqual}}>3</option>
+                                <option {{#ifEqual this.number 4 }}selected{{/ifEqual}}>4</option>
                             </select>
-                            <button id="statusButton" class="madonhang" data-bs-toggle="modal"
-                                data-bs-target="#huyModal"
+                            {{#ifEqual this.status "đang giao hàng" }}
+                            <button id="statusButton" class="madonhang" data-bs-toggle="modal" data-id="{{thhis.id}}"
+                                data-bs-target="#huyModal{{this.id}}"
                                 style="background-color: #ff5722; color: #fff; margin-top: 30px; width: 170px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">
                                 <i class="bi bi-truck" style="margin-right: 8px; font-size: 20px;"></i> Đang giao
                             </button>
-                            <div class="modal fade" id="huyModal" tabindex="-1" aria-labelledby="huyModalLabel"
-                                aria-hidden="true">
+                            <div class="modal fade" id="huyModal{{this.id}}" tabindex="-1"
+                                aria-labelledby="huyModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content"
                                         style="position:relative; display: flex; align-items: center; justify-content: center;">
-                                        <span class="closex"
+                                        <span class="closex" data-id="{{this.id}}"
                                             style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">
                                             &times;
                                         </span>
-                                        <form id="huydonhangForm" method="post"
+                                        <div 
                                             style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
                                             <h1 style="margin-bottom: 20px; text-align: center; color: #333;">Bạn có
                                                 chắc là muốn hủy đơn hàng này?</h1>
-
-                                            {{!-- nhap id san pham --}}
-                                            <input style="display: none;" name="id" value="id"></p>
                                             <div style="display:flex;justify-content:space-between;gap:10px">
-                                                <button type="button" class="button-27 closex"
+                                                <button type="button" class="button-27 closex" data-id="{{this.id}}"
                                                     style="margin-top: 15px; background-color: #000000; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; font-size: 16px;">
                                                     Đóng
                                                 </button>
-                                                <button type="submit" class="button-27"
+                                                <button type="button" class="button-27 huy-btn" id="{{this.id}}" data-id="{{this.id}}"
                                                     style="margin-top: 15px; background-color: #fd1818; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; font-size: 16px;">
                                                     Xác nhận
                                                 </button>
                                             </div>
-                                        </form>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div style="height: 250px; border: 1px solid #000; overflow: hidden;;margin-bottom:30px">
-            <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <img src="https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/7b924462f4f145729864be270dd74875_9366/IP1746_185_IP1746_HM1.jpg.jpg?sh=364&strip=false&sw=364"
-                        class="img-fluid " alt="..." style="height: 100%; width: auto; object-fit: cover;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body don-hang"
-                        style="height: 250px; padding: 20px; position: relative;background-color:white">
-
-                        <p
-                            style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-weight:bold;padding-right: 25px;">
-                            Áo bóng đá retro manchester united màu đỏ 1998
-                        </p>
-                        <p style="">Size: L</p>
-                        <p style="margin-top: -5px; color: red; font-weight: 600; ">
-                            500,000₫</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <select class="form-select" id="so-luong" name="sellist1" disabled
-                                style="width: 100px; height: 40px; border: 1px solid #000000; font-size: 16px; border-radius: 0; margin-top: 30px; box-sizing: border-box;">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                            <button id="statusButton"
-                                style="background-color: #4caf50; color: #fff; margin-top: 30px; width: 170px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">
-                                <i class="bi bi-check-circle" style="margin-right: 8px; font-size: 20px;"></i> Đã giao
+                            {{else}}
+                            {{#ifEqual this.status "đã giao"}}
+                            <button class="madonhang"
+                                style="background-color: #4caf50; color: #fff; margin-top: 30px; width: 170px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">                                
+                                <i class="bi bi-truck" style="margin-right: 8px; font-size: 20px;"></i> {{this.status}}
                             </button>
+                            {{/ifEqual}}
+                            {{#ifEqual this.status "đã hủy"}}
+                            <button 
+                                style="background-color: #ff0000; color: #fff; margin-top: 30px; width: 170px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 0; cursor: pointer; box-sizing: border-box; font-size: 16px;">                                
+                                <i class="bi bi-x-circle" style="margin-right: 8px; font-size: 20px;"></i> {{this.status}}
+                            </button>
+                            {{/ifEqual}}
+                            {{/ifEqual}}
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        {{/each}}
     </div>
 
 
     <div class="flex-item-right" style="padding: 10px;flex: 30%;">
         <div
             style="background: #fff; padding: 0px;padding-top:0; border-radius: 0 15px 15px 0; width: 100%; box-shadow: none;">
-            <form method="get">
+            <form method="POST" action="/account/user/info" id="info-form">
                 <h2 style="text-align: left; margin-bottom: 20px;margin-top: 12px ;font-weight:bold ;font-size:22px">
                     Thông tin cá nhân
                 </h2>
-                <div style="margin-bottom: 15px; display: flex; gap: 4%;">
-                    <input type="text" name="ho" placeholder="Nhập họ của bạn"
-                        style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
-                    <input type="text" name="ten" placeholder="Nhập tên của bạn"
-                        style="width: 48%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
+                <div style="margin-bottom: 15px; display: flex">
+                    <input type="text" id="hovaten" name="hovaten" placeholder="Nhập họ và tên của bạn"
+                        value="{{account.fullname}}"
+                        style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
                 </div>
-                <input type="email" name="email" placeholder="Nhập email của bạn"
+                <input type="email" id="email" name="email" placeholder="Nhập email của bạn" value="{{account.email}}"
                     style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;margin-bottom: 15px;">
-                <input type="text" name="sdt" placeholder="Nhập sdt của bạn"
+                <input type="text" id="sdt" name="sdt" placeholder="Nhập sdt của bạn" value="{{account.phone}}"
                     style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;margin-bottom: 15px;">
                 <div style="display: flex;  justify-content: space-between;gap:10px">
-                    <button class="button-27" type="submit"
+                    <button class="button-27" type="submit" id="info-button"
                         style="background-color: #000; color: #fff;  width: 100%; display: flex; align-items: center; justify-content: center; border: none;"
                         role="button">
                         Lưu
@@ -146,7 +137,7 @@
                             style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">
                             &times;
                         </span>
-                        <form id="changePasswordForm" method="post"
+                        <form method="post" id="pw-form" action="/account/user/password"
                             style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
                             <h1 style="margin-bottom: 20px; text-align: center; color: #333;">Đổi mật khẩu</h1>
 
@@ -180,7 +171,7 @@
                                     required>
                             </div>
 
-                            <button type="submit" class="button-27"
+                            <button type="submit" class="button-27" id="password-btn" 
                                 style="margin-top: 15px; background-color: #ff5722; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; font-size: 16px;">
                                 Lưu thay đổi
                             </button>
@@ -188,10 +179,10 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
+        <form id="huy-form" method="POST" action="/account/user/order" style="display:none">
+            <input id="huy-id" type="hidden" name="id" value="">
+        </form>
         <h2 style="text-align: left; margin-top: 20px; cursor: pointer;  position: relative; font-weight: bold; font-size: 22px; margin-bottom: 20px;"
             onclick="toggleInputs()">
             Địa chỉ giao hàng
@@ -199,32 +190,67 @@
             <span style="display: block; border-bottom: 1px solid rgb(0, 0, 0); margin-top: 5px;"></span>
         </h2>
 
-        <form id="addressInputs" style="display: none;">
+        <form id="addressInputs" style="display: none;" action="/account/user/address" method="post">
 
-            <select name="tinh"
+            <select name="tinh" required
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
-                <option value="TP.HCM">Chọn Tỉnh/Thành phố</option>
+                <option value="">Chọn Tỉnh/Thành phố</option>
+                <option value="TP Hồ Chí Minh" {{#ifEqual address.tinh "TP Hồ Chí Minh" }}selected{{/ifEqual}}>TP Hồ Chí
+                    Minh</option>
             </select>
 
-            <select name="quan"
+            <select name="quan" required
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
-                <option>Chọn Quận/Huyện</option>
+                <option value="">Chọn Quận/Huyện</option>
+                <option value="Quận 1" {{#ifEqual address.quan "Quận 1" }}selected{{/ifEqual}}>Quận 1</option>
+                <option value="Quận 2" {{#ifEqual address.quan "Quận 2" }}selected{{/ifEqual}}>Quận 2</option>
+                <option value="Quận 3" {{#ifEqual address.quan "Quận 3" }}selected{{/ifEqual}}>Quận 3</option>
+                <option value="Quận 4" {{#ifEqual address.quan "Quận 4" }}selected{{/ifEqual}}>Quận 4</option>
+                <option value="Quận 5" {{#ifEqual address.quan "Quận 5" }}selected{{/ifEqual}}>Quận 5</option>
+                <option value="Quận 6" {{#ifEqual address.quan "Quận 6" }}selected{{/ifEqual}}>Quận 6</option>
+                <option value="Quận 7" {{#ifEqual address.quan "Quận 7" }}selected{{/ifEqual}}>Quận 7</option>
+                <option value="Quận 8" {{#ifEqual address.quan "Quận 8" }}selected{{/ifEqual}}>Quận 8</option>
+                <option value="Quận 9" {{#ifEqual address.quan "Quận 9" }}selected{{/ifEqual}}>Quận 9</option>
+                <option value="Quận 10" {{#ifEqual address.quan "Quận 10" }}selected{{/ifEqual}}>Quận 10</option>
+                <option value="Quận 11" {{#ifEqual address.quan "Quận 11" }}selected{{/ifEqual}}>Quận 11</option>
+                <option value="Quận 12" {{#ifEqual address.quan "Quận 12" }}selected{{/ifEqual}}>Quận 12</option>
+                <option value="Quận Bình Thạnh" {{#ifEqual address.quan "Quận Bình Thạnh" }}selected{{/ifEqual}}>Quận
+                    Bình Thạnh</option>
+                <option value="Quận Phú Nhuận" {{#ifEqual address.quan "Quận Phú Nhuận" }}selected{{/ifEqual}}>Quận Phú
+                    Nhuận</option>
+                <option value="Quận Gò Vấp" {{#ifEqual address.quan "Quận Gò Vấp" }}selected{{/ifEqual}}>Quận Gò Vấp
+                </option>
+                <option value="Quận Tân Bình" {{#ifEqual address.quan "Quận Tân Bình" }}selected{{/ifEqual}}>Quận Tân
+                    Bình</option>
+                <option value="Quận Tân Phú" {{#ifEqual address.quan "Quận Tân Phú" }}selected{{/ifEqual}}>Quận Tân Phú
+                </option>
+                <option value="Quận Thủ Đức" {{#ifEqual address.quan "Quận Thủ Đức" }}selected{{/ifEqual}}>Quận Thủ Đức
+                </option>
+                <option value="Huyện Bình Chánh" {{#ifEqual address.quan "Huyện Bình Chánh" }}selected{{/ifEqual}}>Huyện
+                    Bình Chánh</option>
+                <option value="Huyện Cần Giờ" {{#ifEqual address.quan "Huyện Cần Giờ" }}selected{{/ifEqual}}>Huyện Cần
+                    Giờ</option>
+                <option value="Huyện Củ Chi" {{#ifEqual address.quan "Huyện Củ Chi" }}selected{{/ifEqual}}>Huyện Củ Chi
+                </option>
+                <option value="Huyện Hóc Môn" {{#ifEqual address.quan "Huyện Hóc Môn" }}selected{{/ifEqual}}>Huyện Hóc
+                    Môn</option>
+                <option value="Huyện Nhà Bè" {{#ifEqual address.quan "Huyện Nhà Bè" }}selected{{/ifEqual}}>Huyện Nhà Bè
+                </option>
             </select>
 
-            <select name="phuong"
-                style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
-                <option>Chọn Phường/Xã</option>
-            </select>
+            <input type="text" name="phuong" placeholder="Phường/ Xã" required value="{{address.phuong}}"
+                style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 5px;">
+            <p style="font-size: 14px; color: #777; margin-top: 2px;">Ví dụ: Tăng Nhơn Phú A</p>
 
-            <input type="text" name="nha" placeholder="Số nhà/ tên đường"
+            <input type="text" name="nha" placeholder="Số nhà/ tên đường" required value="{{address.nha}}"
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 5px;">
             <p style="font-size: 14px; color: #777; margin-top: 2px;">Ví dụ: 33 đường Lê Duẩn</p>
 
-            <input type="text" name="ghi-chu" placeholder="Ghi chú"
+            <input type="text" name="ghichu" placeholder="Ghi chú" value="{{address.ghichu}}"
                 style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 5px;">
             <p style="font-size: 14px; color: #777; margin-top: 2px;">Ví dụ: Tên tòa nhà, tầng</p>
 
-            <button class="button-27" type="submit"
+            <button class="button-27" type="submit" id="address-btn"
                 style="background-color: #000; color: #fff;  width: 100%; display: flex; align-items: center; justify-content: center; border: none;"
                 role="button">
                 Lưu
@@ -232,7 +258,25 @@
 
         </form>
     </div>
+</div>
+<div class="modal fade" id="alertModal" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content"
+            style="position:relative; display: flex; align-items: center; justify-content: center;">
+            <span class="closexxx"
+                style="position:absolute; right:10px; top:5px; font-size: 30px; cursor: pointer; transition: color 0.3s;">&times;</span>
+            <div
+                style="background: #fff; padding: 40px; border-radius: 20px; width: 100%; height: auto; display: flex; flex-direction: column; justify-content: center;">
+                <p id="alert-text"
+                    style="margin-bottom:-20px; text-align: center; color: #333;font-size:20px;color:red">Có lỗi</p>
 
+            </div>
+            <button type="submit" class="button-27 closexxx"
+                style="margin-bottom: 30px; background-color: #010101; color: #fff; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width:170px; font-size: 16px;">
+                Xác nhận
+            </button>
+        </div>
+    </div>
 </div>
 
 
@@ -253,19 +297,21 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const button = document.getElementById("statusButton");
-
+        const button = document.querySelectorAll("#statusButton");
+        button.forEach(btn => {
+            if (btn.textContent.includes("Đang giao")) {
+                btn.onmouseover = function () {
+                    this.innerHTML = '<i class="bi bi-x-circle" style="margin-right: 8px; font-size: 20px;"></i> Hủy đơn hàng';
+                    this.style.backgroundColor = '#ff0000';
+                };
+                btn.onmouseout = function () {
+                    this.innerHTML = '<i class="bi bi-truck" style="margin-right: 8px; font-size: 20px;"></i> Đang giao';
+                    this.style.backgroundColor = '#ff5722';
+                };
+            }
+        })
         // Check if the button text includes "Đang giao"
-        if (button.textContent.includes("Đang giao")) {
-            button.onmouseover = function () {
-                this.innerHTML = '<i class="bi bi-x-circle" style="margin-right: 8px; font-size: 20px;"></i> Hủy đơn hàng';
-                this.style.backgroundColor = '#ff0000';
-            };
-            button.onmouseout = function () {
-                this.innerHTML = '<i class="bi bi-truck" style="margin-right: 8px; font-size: 20px;"></i> Đang giao';
-                this.style.backgroundColor = '#ff5722';
-            };
-        }
+
 
         document.getElementById('closex').onclick = function () {
             $('#changepasswordModal').modal('hide');
@@ -274,11 +320,142 @@
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const closeButtons = document.getElementsByClassName('closex');
-        Array.from(closeButtons).forEach(function (closeButton) {
-            closeButton.onclick = function () {
-                $('#huyModal').modal('hide');
-            }
-        });
+    const closeButtons = document.getElementsByClassName('closex');
+    
+    Array.from(closeButtons).forEach(function (closeButton) {
+        closeButton.onclick = function () {
+            // Get the modal ID from the button's 'data-id' or the button's own id
+            const modalId = `#huyModal${closeButton.getAttribute('data-id')}`;
+            
+            // Hide the modal dynamically
+            $(modalId).modal('hide');
+        }
     });
+});
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById('info-form');
+        const pwform = document.getElementById('pw-form');
+        const info = document.getElementById('info-button');
+        const pw = document.getElementById('password-btn');
+        const alerttext = document.getElementById("alert-text")
+        const closeButtons = document.querySelectorAll('.closexxx');
+        closeButtons.forEach(function (button) {
+            button.onclick = function () {
+                $('#alertModal').modal('hide');
+            };
+        });
+        pw.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (!checkpw()) {
+                $('#alertModal').modal('show');
+            } else {
+                pwform.submit();
+            }
+        })
+        info.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (!check()) {
+                $('#alertModal').modal('show');
+            } else {
+                form.submit();
+            }
+        })
+        function check() {
+            const accounts = {{{ accounts }}};
+            //Ho va ten
+            const hovaten = document.getElementById("hovaten");
+            if (hovaten.value == '') {
+                alerttext.innerHTML = "Họ và tên không được để trống!";
+                return false;
+            } else if (containsOnlyText(hovaten.value) == false) {
+                alerttext.innerHTML = "Họ và tên chỉ được chứa chữ cái!";
+                return false;
+            }
+
+            //So dien thoai
+            const sdt = document.getElementById("sdt");
+            if (sdt.value == '') {
+                alerttext.innerHTML = "Số điện thoại không được để trống!";
+                return false;
+            }
+            else if (sdt.value.length > 11 || sdt.value.length < 7) {
+                alerttext.innerHTML = "Số điện thoại không hợp lệ!";
+                return false;
+            } else if (containsOnlyNumbers(sdt.value) == false) {
+
+                alerttext.innerHTML = "Số điện thoại chỉ được chứa chữ số!";
+                return false;
+            }
+            else if (accounts.some(obj => obj.phone === sdt.value) == true) {
+                alerttext.innerHTML = "Số điện thoại đã được sử dụng để đăng kí!";
+                return false;
+            }
+            //email
+            const email = document.getElementById("email");
+            if (email.value == '') {
+                alerttext.innerHTML = "Email không được để trống!";
+                return false;
+            }
+            else if (accounts.some(obj => obj.email === email.value) == true) {
+                alerttext.innerHTML = "Email đã được sử dụng để đăng kí!";
+                return false;
+            }
+            function containsOnlyText(str) {
+                return /^[a-zA-Z\s]+$/.test(str);
+            }
+            function containsOnlyNumbers(str) {
+                return /^\d+$/.test(str);
+            }
+            return true;
+            }
+        function checkpw() {
+            const pwd = {{{ pw }}};
+            const oldpw = document.getElementById("oldPassword");
+            const newpw = document.getElementById("newPassword");
+            const conpw = document.getElementById("confirmPassword");
+            if (oldpw.value == '') {
+                alerttext.innerHTML = "Mật khẩu không được để trống!";
+                return false;
+            }
+            else if (oldpw.value != pwd) {
+                alerttext.innerHTML = "Mật khẩu không đúng!";
+                return false;
+            }
+            else if (newpw.value == '' || conpw.value == '') {
+                alerttext.innerHTML = "Mật khẩu không được để trống!";
+                return false;
+            }
+            else if (newpw.value.length < 6) {
+                alerttext.innerHTML = "Mật khẩu phải lớn hơn 5 kí tự!";
+                return false;
+            }
+            else if (newpw.value != conpw.value) {
+                alerttext.innerHTML = "Mật khẩu không khớp!";
+                return false;
+            }
+            else if (newpw.value == oldpw.value) {
+                alerttext.innerHTML = "Mật khẩu mới không được trùng với mật khẩu cũ!";
+                return false;
+            }
+            return true;
+        }
+    })
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const huyform = document.getElementById('huy-form');
+    const huyid = document.getElementById('huy-id');
+    const huybtn = document.querySelectorAll('.huy-btn');
+
+    huybtn.forEach(function (button) {
+        button.onclick = function () {
+            const id = button.getAttribute('data-id');
+            huyid.value = id;
+            huyform.submit();
+        };
+    });
+});
 </script>
