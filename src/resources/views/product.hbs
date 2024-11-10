@@ -4,12 +4,13 @@
     <div class="flex-item-left card" style="flex: 45%; height:auto; border:none;">
         <!-- Display the main image -->
         <img src="/{{product.mainImage}}" class="img-fluid card-img-top" alt="Main product image"
-            style="height: 450px; width: 100%; object-fit: cover" data-original-src="/{{product.mainImage}}" >
+            style="height: 450px; width: 100%; object-fit: cover" data-original-src="/{{product.mainImage}}">
 
         <!-- Display thumbnails of other images -->
         <div style="margin-top: 10px;">
             {{#each product.otherImages}}
-            <img class="small-img" style="height: 60px; margin-right: 5px;border:#f1f0f0 1px solid" src="/{{this}}" alt="Product thumbnail">
+            <img class="small-img" style="height: 60px; margin-right: 5px;border:#f1f0f0 1px solid" src="/{{this}}"
+                alt="Product thumbnail">
             {{/each}}
         </div>
     </div>
@@ -137,6 +138,204 @@
                 style="display: none; padding: 10px; margin-top: 10px; border: 1px solid #ccc; background-color: #f9f9f9;">
                 <p>{{product.description}}
                 </p>
+            </div>
+            <p style="margin-top: 20px; cursor: pointer; color: rgb(0, 0, 0); position: relative; text-align: left;"
+                onclick="toggleComment()">
+                <span>Bình luận và đánh giá</span>
+                <span id="toggleIcon1" style="position: absolute; right: 0;">+</span>
+                <span style="display: block; border-bottom: 1px solid rgb(0, 0, 0); margin-top: 5px;"></span>
+            </p>
+            <div class="comment" id="comment"
+                style="display: none; padding: 10px;padding-left:20px; margin-top: 10px; border: 1px solid #ccc; background-color: #f9f9f9;">
+                {{#if comments}}
+                {{#if dccmt}}
+                <form id="comment-form" style="position: relative; padding-bottom: 50px;" method="post" action="comment"
+                    onsubmit="return validateForm()">
+                    <div style="display: flex">
+                        <p style="font-weight: bold; display: inline-block; margin-right: 10px;">{{user.username}}</p>
+
+                        <div style="display:flex; margin-top:-9px">
+                            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+                                rel="stylesheet">
+
+                            <div id="rating-container">
+                                <i style="font-size: 16px;" id="1-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="2-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="3-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="4-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="5-star" class="fa fa-star rating-star"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" id="selected-rating" name="rating" value="">
+                        <input type="hidden" id="product_id" name="id" value="{{product.product_id}}">
+
+                        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+                        <script>
+                            $(function () {
+                                let ratingValue = 0;  // Variable to store the selected rating
+
+                                $('#rating-container .rating-star').hover(function () {
+                                    // Highlight stars on hover
+                                    $(this).prevAll().addBack().addClass("rating-hover");
+                                    $(this).nextAll().removeClass("rating-hover");
+                                }, function () {
+                                    // Remove hover effect when mouse leaves
+                                    $('#rating-container .rating-star').removeClass("rating-hover");
+                                });
+
+                                $('#rating-container .rating-star').click(function () {
+                                    // Set the rating value when a star is clicked
+                                    ratingValue = $(this).attr('id').split('-')[0];  // Get the number from the star ID (1, 2, 3, etc.)
+
+                                    // Set the chosen stars to gold and remove from the next ones
+                                    $(this).prevAll().addBack().addClass("rating-chosen");
+                                    $(this).nextAll().removeClass("rating-chosen");
+
+                                    // Update the hidden input field with the selected rating
+                                    $('#selected-rating').val(ratingValue);
+
+                                    // Optionally, display the rating value
+                                    console.log('Selected rating:', ratingValue);
+                                });
+                            });
+
+                            function validateForm() {
+                                var comment = document.querySelector('textarea[name="comment"]').value.trim();
+                                var rating = document.getElementById('selected-rating').value;
+
+                                if (!comment) {
+                                    alert("Vui lòng nhập bình luận.");
+                                    return false; // Prevent form submission
+                                }
+
+                                if (!rating) {
+                                    alert("Vui lòng chọn đánh giá.");
+                                    return false; // Prevent form submission
+                                }
+
+                                return true; // Allow form submission if validation passes
+                            }
+                        </script>
+
+                    </div>
+                    <textarea name="comment" placeholder="Nhập bình luận"
+                        style="margin: 0 20px; width: 94%; font-size: 16px;"></textarea>
+                    <button type="submit" style="position: absolute; bottom: 13px; right: 15px; padding: 10px 20px; font-size: 16px;
+                background-color: #f13737; color: #ffffff; border: none; border-radius: 8px;
+                cursor: pointer; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s;">
+                        Đăng
+                    </button>
+                </form>
+                <span style="display: block; border-bottom: 2px solid rgb(217, 215, 215); margin-top: 0px;"></span>
+                {{/if}}
+                {{#each comments}}
+                <div>
+                    <div style="display: flex">
+                        <p style="font-weight: bold; display: inline-block; margin-right: 10px;">{{this.username}}
+                            {{#ifEqual this.username ../user.username}} (bạn){{/ifEqual}}
+                        </p>
+                        <!-- Display rating as stars -->
+                        <div style="color: gold; font-size: 16px;margin-top:7px">
+                            {{#each (range 1 6)}}
+                            {{#if (lte @index ../this.rating)}}
+                            <i class="fa fa-star"></i> <!-- Filled star for rating -->
+                            {{else}}
+                            <i class="fa fa-star-o"></i> <!-- Empty star for the remaining -->
+                            {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <p
+                        style="font-weight: 100; font-family: 'Arial', sans-serif; font-size: 12px; font-style: italic;margin-top:-5px">
+                        Ngày: {{this.ngay}}</p>
+                    <p style="margin-left: 20px;">{{this.comment}}</p>
+                    <span style="display: block; border-bottom: 2px solid rgb(217, 215, 215); margin-top: 5px;"></span>
+                </div>
+                {{/each}}
+                {{else}}
+                <p>Chưa có bình luận và đánh giá</p>
+                {{#if dccmt}}
+                <form id="comment-form" style="position: relative; padding-bottom: 50px;" method="post" action="comment"
+                    onsubmit="return validateForm()">
+                    <div style="display: flex">
+                        <p style="font-weight: bold; display: inline-block; margin-right: 10px;">{{user.username}}</p>
+
+                        <div style="display:flex; margin-top:-9px">
+                            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+                                rel="stylesheet">
+
+                            <div id="rating-container">
+                                <i style="font-size: 16px;" id="1-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="2-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="3-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="4-star" class="fa fa-star rating-star"></i>
+                                <i style="font-size: 16px;" id="5-star" class="fa fa-star rating-star"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" id="selected-rating" name="rating" value="">
+                        <input type="hidden" id="product_id" name="id" value="{{product.product_id}}">
+
+                        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+                        <script>
+                            $(function () {
+                                let ratingValue = 0;  // Variable to store the selected rating
+
+                                $('#rating-container .rating-star').hover(function () {
+                                    // Highlight stars on hover
+                                    $(this).prevAll().addBack().addClass("rating-hover");
+                                    $(this).nextAll().removeClass("rating-hover");
+                                }, function () {
+                                    // Remove hover effect when mouse leaves
+                                    $('#rating-container .rating-star').removeClass("rating-hover");
+                                });
+
+                                $('#rating-container .rating-star').click(function () {
+                                    // Set the rating value when a star is clicked
+                                    ratingValue = $(this).attr('id').split('-')[0];  // Get the number from the star ID (1, 2, 3, etc.)
+
+                                    // Set the chosen stars to gold and remove from the next ones
+                                    $(this).prevAll().addBack().addClass("rating-chosen");
+                                    $(this).nextAll().removeClass("rating-chosen");
+
+                                    // Update the hidden input field with the selected rating
+                                    $('#selected-rating').val(ratingValue);
+
+                                    // Optionally, display the rating value
+                                    console.log('Selected rating:', ratingValue);
+                                });
+                            });
+
+                            function validateForm() {
+                                var comment = document.querySelector('textarea[name="comment"]').value.trim();
+                                var rating = document.getElementById('selected-rating').value;
+
+                                if (!comment) {
+                                    alert("Vui lòng nhập bình luận.");
+                                    return false; // Prevent form submission
+                                }
+
+                                if (!rating) {
+                                    alert("Vui lòng chọn đánh giá.");
+                                    return false; // Prevent form submission
+                                }
+
+                                return true; // Allow form submission if validation passes
+                            }
+                        </script>
+
+                    </div>
+                    <textarea name="comment" placeholder="Nhập bình luận"
+                        style="margin: 0 20px; width: 94%; font-size: 16px;"></textarea>
+                    <button type="submit" style="position: absolute; bottom: 13px; right: 15px; padding: 10px 20px; font-size: 16px;
+                background-color: #f13737; color: #ffffff; border: none; border-radius: 8px;
+                cursor: pointer; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s;">
+                        Đăng
+                    </button>
+                </form>
+                <span style="display: block; border-bottom: 2px solid rgb(217, 215, 215); margin-top: 0px;"></span>
+                {{/if}}
+
+                {{/if}}
             </div>
         </div>
     </div>
@@ -345,7 +544,6 @@
 
 <div class="grid-container"
     style="display: flex; overflow: hidden; gap: 10px; padding: 0; position: relative; width: 100%; ">
-
     <!-- Previous Button -->
     <button class="prev-btn2"
         style="position: absolute; top: 50%; left: 0px; background: rgba(255, 255, 255, 0); border: none; cursor: pointer; font-size: 36px; transform: translateY(-50%); z-index: 10; padding: 10px;">
@@ -356,12 +554,13 @@
     <div class="product-cards2"
         style="display: flex; transition: transform 0.3s ease; padding: 0; margin: 0 50px 0 50px;">
         <!-- Example Product Cards -->
-        
+
         {{#each similiar}}
-        <a class="grid-item grid-item2" href="/product/{{this.product_id}}" style="flex: 0 0 25%; box-sizing: border-box;">
+        <a class="grid-item grid-item2" href="/product/{{this.product_id}}"
+            style="flex: 0 0 25%; box-sizing: border-box;">
             <div class="card" style="width: auto; position: relative;">
-                <img src="../../../../{{this.mainImage}}" 
-                    class="card-img-top" alt="..." style="width: 100%; height: 350px; object-fit: cover;border-bottom:#d6d5d5 1px solid"
+                <img src="../../../../{{this.mainImage}}" class="card-img-top" alt="..."
+                    style="width: 100%; height: 350px; object-fit: cover;border-bottom:#d6d5d5 1px solid"
                     data-original-src="../../../../{{this.mainImage}}">
                 <i class="bi bi-cart4 cart-icon" style="display: none;"></i>
                 <div style="margin-top: 10px;">
@@ -377,8 +576,8 @@
             </div>
         </a>
         {{/each}}
-        
-        
+
+
 
         <!-- Add more cards as needed -->
     </div>
@@ -432,7 +631,6 @@
 
 <script>
     function toggleDescription() {
-
         const description = document.getElementById('description');
         const icon = document.getElementById('toggleIcon');
 
@@ -442,6 +640,18 @@
         } else {
             description.style.display = 'none';
             icon.innerHTML = '+'; // Change icon back to plus
+        }
+    }
+    function toggleComment() {
+        const comment = document.getElementById('comment');
+        const icon1 = document.getElementById('toggleIcon1');
+
+        if (comment.style.display === 'none' || comment.style.display === '') {
+            comment.style.display = 'block';
+            icon1.innerHTML = '-'; // Change icon to minus
+        } else {
+            comment.style.display = 'none';
+            icon1.innerHTML = '+'; // Change icon back to plus
         }
     }
 </script>
@@ -481,8 +691,8 @@
                     cartIcon.style.display = 'none'; // Hide the icon after fading out
                 }, 200); // Matches the CSS transition duration
             });
-
         });
+
     });
 
 </script>

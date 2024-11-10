@@ -10,7 +10,7 @@
             <h2 style="text-align: left; margin-bottom: 20px; font-weight:bold; font-size:22px;">Thông tin sản phẩm
             </h2>
 
-            <form id="product-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <form id="product-form" action="/upload" method="GET" enctype="multipart/form-data">
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
                     <input type="text" name="ten" placeholder="Tên sản phẩm"
                         style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
@@ -24,37 +24,16 @@
 
                     <select class="form-select" id="category" name="danhmuc"
                         style="width: 150px; height: 49.6px; border: 1px solid #000000; font-size: 16px; border-radius: 0; margin-top: 0px; box-sizing: border-box;"
-                        required >
+                        required>
                         <option value="">Danh mục</option>
                         {{#each category}}
                         <option value="{{category_id}}">{{name}}</option>
                         {{/each}}
                     </select>
+                    <input type="text" name="color" placeholder="Màu sắc (Trắng, Đen,...)"
+                        style="width: 38%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
+                        required maxlength="100" title="Chỉ nhận chữ cái, khoảng trắng, và dấu phẩy">
 
-                    <select class="livesearch" name="color" multiple required
-                        style=" width: 250px; border: 1px solid #000000; font-size: 16px; border-radius: 0; box-sizing: border-box;">
-                        <option value="Trắng">Trắng</option>
-                        <option value="Đen">Đen</option>
-                        <option value="Đỏ">Đỏ</option>
-                        <option value="Xanh Dương">Xanh Dương</option>
-                        <option value="Xanh Lá">Xanh Lá</option>
-                        <option value="Vàng">Vàng</option>
-                        <option value="Hồng">Hồng</option>
-                        <option value="Tím">Tím</option>
-                        <option value="Nâu">Nâu</option>
-                        <option value="Cam">Cam</option>
-                        <option value="Xám">Xám</option>
-                        <option value="Be">Be</option>
-                    </select>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
-                    <script type="text/javascript">
-
-                        $(".livesearch").chosen({
-                            placeholder_text_multiple: "Chọn màu sắc",
-                            no_results_text: "Không tìm thấy màu",
-                            height: "100px",
-                        });
-                    </script>
                 </div>
 
                 <div style="margin-top: 15px;">
@@ -138,6 +117,12 @@
                     Quản lý tài khoản
                 </a>
             </div>
+            <div style="display: flex;  justify-content: right;">
+                <a class="button-27" href="/admin/order" style="background-color: #ff5722; color: #fff;margin-top: 15px;
+                     width: 100%; display: flex; align-items: center; justify-content: center; border: none;">
+                    Quản lý đơn hàng
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -203,6 +188,11 @@
 <script>
     document.getElementById('product-form').addEventListener('submit', function (e) {
         e.preventDefault();
+        const colorInput = document.querySelector('input[name="color"]');
+        if (colorInput) {
+            // Replace only spaces that are 2 or more consecutive characters
+            colorInput.value = colorInput.value.replace(/\s{2,}/g, '');
+        }
         const formData = new FormData(this);
         fetch('', {
             method: 'POST',

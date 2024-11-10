@@ -72,6 +72,19 @@ app.engine(
         });
         return formattedPrice;
       },
+      joinColors: function (colors) {
+        return colors.join(", ");
+      },
+      range: function (start, end) {
+        let result = [];
+        for (let i = start; i < end; i++) {
+          result.push(i);
+        }
+        return result;
+      },
+      lte: function (a, b) {
+        return a <= b;
+      },
     },
   })
 );

@@ -109,20 +109,6 @@ class adminController {
         }
         res.render("admin/edit", {
           product: product,
-          colors: [
-            "Trắng",
-            "Đen",
-            "Đỏ",
-            "Xanh Dương",
-            "Xanh Lá",
-            "Vàng",
-            "Hồng",
-            "Tím",
-            "Nâu",
-            "Cam",
-            "Xám",
-            "Be",
-          ],
           category: results,
           user: req.cookies.user ? JSON.parse(req.cookies.user) : null,
         });
@@ -432,23 +418,31 @@ class adminController {
       res.redirect("/");
     } else {
       const id = req.params.id;
-      const sql = `SELECT cart.*, product.name AS product_name, product.image AS product_image, 
+      let sql = `SELECT cart.*, product.name AS product_name, product.image AS product_image, 
           account.*, address.address_id, address.tinh, address.quan, address.phuong, address.nha, address.ghichu 
           FROM cart
           JOIN product ON cart.product_id = product.product_id
           JOIN account ON cart.account_id = account.account_id
           LEFT JOIN address ON account.account_id = address.account_id
-          WHERE cart.account_id = ? AND (cart.status = ? OR cart.status = ?)
-          ORDER BY cart.date DESC;
+          WHERE cart.account_id = ?
           `;
-      db.query(sql, [id, "đang giao hàng", "đã giao"], (err, results) => {
+      const sort=req.query.sort;
+      if (sort === "dang-giao") {
+        sql += " AND cart.status = 'đang giao hàng' ORDER BY cart.date DESC";
+      } else if (sort === "da-giao") {
+        sql += " AND cart.status = 'đã giao' ORDER BY cart.date DESC";
+      } else {
+        sql +=
+          " AND (cart.status = 'đang giao hàng' OR cart.status = 'đã giao') ORDER BY cart.date DESC";
+      }
+      db.query(sql, [id], (err, results) => {
         if (err) {
           console.error("Database query error:", err);
           return res.status(500).send("Server error");
         }
         if (results.length == 0) {
           res.render(`admin/order`, {
-            note: "Tài khoản chưa đặt món hàng nào!",
+            note: "Lịch sử đơn hàng trống!",
             user: user ? JSON.parse(user) : null,
           });
           return;
@@ -467,12 +461,11 @@ class adminController {
           const minutes = dateObj.getMinutes().toString().padStart(2, "0");
           product.ngay = `${hours}:${minutes} ${day}/${month}/${year}`;
         });
-        
-          res.render(`admin/order`, {
-            products: results,
-            user: user ? JSON.parse(user) : null,
-          });
-        
+
+        res.render(`admin/order`, {
+          products: results,
+          user: user ? JSON.parse(user) : null,
+        });
       });
     }
   }
@@ -496,15 +489,24 @@ class adminController {
     ) {
       res.redirect("/");
     } else {
-      const sql = `SELECT cart.*, product.name AS product_name, product.image AS product_image, 
-          account.*, address.address_id, address.tinh, address.quan, address.phuong, address.nha, address.ghichu 
+      const sort = req.query.sort;
+      let sql = `
+          SELECT cart.*, product.name AS product_name, product.image AS product_image, 
+                account.*, address.address_id, address.tinh, address.quan, address.phuong, address.nha, address.ghichu 
           FROM cart
           JOIN product ON cart.product_id = product.product_id
           JOIN account ON cart.account_id = account.account_id
           LEFT JOIN address ON account.account_id = address.account_id
-          WHERE  cart.status = ? OR cart.status = ?
-          ORDER BY cart.date ASC;`
-      db.query(sql, ["đang giao hàng", "đã giao"], (err, results) => {
+      `;
+      if (sort === "dang-giao") {
+        sql += " WHERE cart.status = 'đang giao hàng' ORDER BY cart.date DESC";
+      } else if (sort === "da-giao") {
+        sql += " WHERE cart.status = 'đã giao' ORDER BY cart.date DESC";
+      } else {
+        sql +=
+          " WHERE (cart.status = 'đang giao hàng' OR cart.status = 'đã giao') ORDER BY cart.date DESC";
+      }
+      db.query(sql, (err, results) => {
         if (err) {
           console.error("Database query error:", err);
           return res.status(500).send("Server error");

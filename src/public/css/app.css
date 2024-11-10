@@ -228,3 +228,24 @@ a:active {
 .btn-dang-giao:hover {
   background-color: #e64a19; /* Darker shade for hover effect */
 }
+
+
+.rating-star {
+  color: #d3d3d3; /* Light grey for empty stars */
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.rating-hover {
+  color: #FFD700; /* Gold for the hovered star */
+  transform: scale(1.2); /* Slightly enlarge the star when hovered */
+}
+
+.rating-chosen {
+  color: #FFD700; /* Gold when selected */
+  transform: scale(1.2); /* Slightly enlarge the selected star */
+}
+
+.rating-container {
+  display: flex;
+}

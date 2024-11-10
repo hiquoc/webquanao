@@ -1,7 +1,34 @@
 <div class="flex-container"
     style="display: flex;flex-direction: row;font-size: 30px;gap:50px;text-align: center;padding: 0px 50px 0 50px; ">
     <div class="flex-item-left" style="padding: 10px; flex: 70%;">
-        <h1 style="text-align: left;font-weight:bold ;">Đơn hàng</h1>
+        <div style="display: flex;justify-content:space-between">
+            <h1 style="text-align: left;font-weight:bold ;">Đơn hàng</h1>
+            <div style="display: flex; align-items: center;margin-right:0px;margin-bottom:6px">
+                <form class="dropdown" id="sortForm" method="GET" action="">
+                    <button id="sortDropdown"
+                        style="width:100px;background-color: #ffffff; border: 1px solid #000000; border-radius: px; color: #151515; padding: 10px; font-family: 'Arial', sans-serif; font-size: 16px; font-weight: bold; cursor: pointer; "
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Lọc
+                    </button>
+                    <input type="hidden" name="sort" id="sortValue" value="">
+                    <ul class="dropdown-menu" name="sort"
+                        style="position: absolute; left: 50%; transform: translate(-50%, 0); text-align: center; margin-top: 5px; padding: 0; border-radius: 5px; background-color: #ffffff; border: 1px solid #ddd; z-index: 1000; width: auto;">
+                        <li style="list-style: none;">
+                            <button class="dropdown-item" value="dang-giao"
+                                style="padding: 10px 15px; display: block; text-decoration: none; color: #333;">
+                                Đang giao
+                            </button>
+                        </li>
+                        <li style="list-style: none;">
+                            <button class="dropdown-item" value="da-giao"
+                                style="padding: 10px 15px; display: block; text-decoration: none; color: #333;">
+                                Đã giao
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
         {{#if note }}
         <p style="text-align: left;margin-top:10px; font-size: 20px">{{note}}</p>
         {{/if}}
@@ -420,7 +447,7 @@
                 // Get the modal ID from the button's 'data-id' or the button's own id
                 const modalId = `#huyModal${closeButton.getAttribute('data-id')}`;
                 // Hide the modal dynamically
-                $(modalId).modal('hide');  
+                $(modalId).modal('hide');
             }
         });
         const xemButtons = document.getElementsByClassName('closexx');
@@ -450,5 +477,17 @@
                 huyform.submit();
             };
         });
+
+
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function () {
+                const sort = this.value;
+                document.getElementById('sortValue').value = sort;
+
+                // Submit the form to send both 'text' and 'sort' parameters
+                document.getElementById('sort-form').submit();
+            });
+        });
+
     });
 </script>

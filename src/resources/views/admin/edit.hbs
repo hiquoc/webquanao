@@ -15,13 +15,13 @@
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
                     <input type="text" name="ten" placeholder="Tên sản phẩm" value="{{product.name}}"
                         style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
-                        required>
+                         maxlength="55" required>
                 </div>
 
                 <div style="margin-bottom: 15px; display: flex; justify-content: space-between;align-items:center">
                     <input type="text" name="price" placeholder="Giá" value="{{product.price}}"
                         style="width: 28%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
-                        required>
+                         maxlength="10" pattern="\d*" title="Chỉ nhận số (không quá 10 chữ số)" required>
                     <select class="form-select" id="category" name="danhmuc"
                         style="width: 150px; height: 49.6px; border: 1px solid #000000; font-size: 16px; border-radius: 0; margin-top: 0px; box-sizing: border-box;"
                         required>
@@ -33,22 +33,12 @@
 
                     </select>
 
-                    <select class="livesearch" name="color" multiple required
-                        style=" width: 250px; border: 1px solid #000000; font-size: 16px; border-radius: 0; box-sizing: border-box;">
-                        {{#each colors}}
-                        <option value="{{this}}" {{#ifInArray this ../product.color}}selected{{/ifInArray}}>
-                            {{this}}
-                        </option>
-                        {{/each}}
-                    </select>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
-                    <script type="text/javascript">
-                        $(".livesearch").chosen({
-                            placeholder_text_multiple: "Chọn màu sắc",
-                            no_results_text: "Không tìm thấy màu",
-                            height: "100px",
-                        });
-                    </script>
+                    
+                    <input type="text" name="color" placeholder="Màu sắc (Trắng, Đen,...)"
+                        style="width: 38%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
+                        required maxlength="100"
+                        title="Chỉ nhận chữ cái, khoảng trắng, và dấu phẩy" 
+                        value="{{joinColors product.color}}">
                 </div>
 
                 <div style="margin-top: 15px;">
@@ -146,6 +136,12 @@
                     Quản lý tài khoản
                 </a>
             </div>
+            <div style="display: flex;  justify-content: right;">
+                <a class="button-27" href="/admin/order" style="background-color: #ff5722; color: #fff;margin-top: 15px;
+                     width: 100%; display: flex; align-items: center; justify-content: center; border: none;">
+                    Quản lý đơn hàng
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -166,6 +162,11 @@
         // Check if any files are selected
         if (files.length === 0) {
             return; // Exit if no files selected
+        }
+        if (files.length > 4) {
+            alert('Nhiều nhất là 4 files ảnh.');
+            document.getElementById('product-images').value = ''; // Clear the input
+            return;
         }
 
         // Set the first image as the large image
@@ -208,7 +209,11 @@
 <script>
     document.getElementById('product-form').addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent the form from submitting normally
-
+        const colorInput = document.querySelector('input[name="color"]');
+        if (colorInput) {
+    // Replace only spaces that are 2 or more consecutive characters
+    colorInput.value = colorInput.value.replace(/\s{2,}/g, '');
+}
         if (document.getElementById('oldimg').style.display == "none") {
             const formData = new FormData(this);
             fetch('/admin/edit', {
