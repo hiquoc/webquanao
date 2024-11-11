@@ -249,3 +249,35 @@ a:active {
 .rating-container {
   display: flex;
 }
+
+/* Add a bottom border to the button when hovered */
+.dropdown .btn:hover {
+  border-bottom: 3px solid black; /* Black bar under the button */
+  transition: border-bottom 0.3s ease; /* Smooth transition */
+}
+
+/* Optional: To prevent the border from affecting layout */
+.dropdown .btn {
+  position: relative;
+}
+
+/* Optional: Adjust the color of the icon on hover (for better visibility) */
+.dropdown .btn:hover svg {
+  color: #007bff; /* Change icon color on hover, optional */
+}
+
+/* Add a bottom border to the cart button when hovered */
+.btn-cart:hover {
+  border-bottom: 3px solid black; /* Black bar under the button */
+  transition: border-bottom 0.3s ease; /* Smooth transition */
+}
+
+/* Optional: To prevent the border from affecting layout */
+.btn-cart {
+  position: relative;
+}
+
+/* Optional: Adjust the color of the icon on hover (for better visibility) */
+.btn-cart:hover svg {
+  color: #007bff; /* Change icon color on hover, optional */
+}

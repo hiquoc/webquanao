@@ -79,7 +79,7 @@
                 <div style="display: flex; justify-content: space-between; gap: 20px;align-items:center">
                     {{#each product.color}}
                     <button
-                        style="width: 100px; max-height: 61.6px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                        style="min-width: 100px; max-height: 61.6px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
                         type="button" class="btn btn-light btn-color" onclick="highlightColor(this)">
                         {{this}}
                     </button>

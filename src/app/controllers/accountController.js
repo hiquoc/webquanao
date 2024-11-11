@@ -526,6 +526,26 @@ class accountController {
           address = addressResults[0];
         }
       });
+      let accounts;
+      const query3 = "SELECT * FROM account";
+      db.query(query3, (err, accountResults) => {
+        if (err) {
+          console.error("Database query error:", err);
+          return res.status(500).send("Server error");
+        }
+        if (accountResults.length === 0) {
+          res.redirect("/account/login");
+        } else {
+          const index = accountResults.findIndex(
+            (acc) => acc.account_id === id
+          );
+          if (index !== -1) {
+            account = accountResults[index]; // Store the removed item if needed
+            accountResults.splice(index, 1); // Remove the item from results
+          }
+          accounts = accountResults;
+        }
+      });
       // Query to fetch cart items
       const query = "SELECT * FROM cart WHERE account_id = ? AND status = ?";
       db.query(query, [id, "đang xử lý"], (err, cartResults) => {
@@ -575,6 +595,7 @@ class accountController {
               res.render("account/checkout", {
                 user: user ? JSON.parse(user) : null,
                 account: account,
+                accounts:JSON.stringify(accounts),
                 address: address,
                 cartItems: cartResults,
                 nop: numberofproducts,

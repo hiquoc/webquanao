@@ -6,8 +6,9 @@
   </div>
 
   <ul class="ul-header"
-    style="display: flex; align-items: center; margin: 0 auto; gap: 30px; list-style-type: none; font-weight: 400;">
-    <li class="header-items"><a class="dropdown-item dropdown-item-header" href="/new?sort=moi-nhap">Hàng mới về</a></li>
+    style="display: flex; align-items: center; margin: 0 auto; gap: 30px; list-style-type: none; font-weight: 400;margin-left:60px">
+    <li class="header-items"><a class="dropdown-item dropdown-item-header" href="/new?sort=moi-nhat">Hàng mới về</a>
+    </li>
     <li class="header-items">
       <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -36,18 +37,8 @@
         </ul>
       </div>
     </li>
-    <li class="header-items">
-      <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown"
-          aria-expanded="false" style="background: none; border: none; color: inherit; cursor: pointer;">
-          Phụ kiện
-        </button>
-        <ul class="dropdown-menu dropdown-menu-header" aria-labelledby="dropdownMenuButton3">
-          <li><a class="dropdown-item dropdown-item-header" href="/tui">Túi</a></li>
-          <li><a class="dropdown-item dropdown-item-header" href="/giay">Giày</a></li>
-        </ul>
-      </div>
-    </li>
+        <li class="header-items"><a class="dropdown-item dropdown-item-header" href="/new?sort=mua-nhieu">Hot nhất</a>
+
   </ul>
 
   <div style="display: flex; align-items: center; gap: 15px;">
@@ -65,8 +56,19 @@
       </div>
     </form>
 
+    <button class="btn-cart" style="background: none; border: none; color: inherit; cursor: pointer; padding: 0;">
+      <a href="/guess">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-image"
+          viewBox="0 0 16 16">
+          <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+          <path
+            d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+        </svg>
+      </a>
+    </button>
 
-    <div class="dropdown">
+
+    <div class="dropdown" style="margin-right:-7px">
       <button class="btn dropdown-toggle-header" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown"
         aria-expanded="false" aria-label="Open user menu"
         style="background: none; border: none; color: inherit; cursor: pointer; padding: 0;">
@@ -94,7 +96,7 @@
     </div>
 
 
-    <button style="background: none; border: none; cursor: pointer;margin-top:-4px">
+    <button class="btn-cart" style="background: none; border: none; cursor: pointer;margin-top:-4px">
       <a href="/account/cart" style="">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4"
           viewBox="0 0 16 16">

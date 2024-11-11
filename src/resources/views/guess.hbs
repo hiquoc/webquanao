@@ -1,0 +1,135 @@
+<div class="flex-container"
+  style="display: flex;flex-direction: row;font-size: 30px;gap:50px;text-align: center;padding: 0px 50px 0 50px; ">
+  <div class="flex-item-left" style="padding: 10px; flex: 70%;">
+    <h2
+      style="text-align: left;font-weight:600px;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; color: #333;">
+      Tìm kiếm sản phẩm {{text}}</h2>
+    <form id="fileUploadForm" action="search">
+      <div class="form-group" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <h2 style="text-align: left; margin-bottom: 20px; margin-top: 20px; font-weight:bold; font-size:22px;">
+          Hình ảnh sản phẩm
+        </h2>
+        <input type="file" id="fileInput" name="img" accept="image/*" required
+          style="width: auto; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;"
+          onchange="previewImages()">
+        <div id="fileInfo" class="mt-3"></div>
+        <button type="submit" class="button-27" style="width: 200px;margin-top:20px">
+          Tìm kiếm
+        </button>
+        <input id="text" name="text" type="hidden">
+      </div>
+
+    </form>
+
+    <div id="predictionResult" class="mt-3"></div>
+  </div>
+
+  <div class="flex-item-left" style="padding: 15px; flex: 30%;  border: 1px solid #ddd;
+     border-radius: 5px; margin-top: 12px; position: sticky; top: 117px; height:fit-content">
+    <div>
+      <h2
+        style="text-align: left; font-size: 20px; color: #000000;font-family: 'Roboto Condensed', sans-serif, Arial, sans-serif; ">
+        Sản phẩm hot</h2>
+      <span style="display: block; border-bottom: 2px solid rgb(0, 0, 0); margin-top: 5px;"></span>
+    </div>
+    <div>
+
+      {{#each hot}}
+      <a href="/product/{{this.product_id}}" style="text-decoration: none; color: inherit;">
+        <div class="card mb-3"
+          style="max-width: 540px; height: 100px; margin-top: 20px; overflow: hidden; border: none; background-color: transparent;">
+          <div class="row g-0 h-100">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+              <img src="{{this.mainImage}}" class="img-fluid" alt="Image"
+                style="height: 100px; width: 70px; object-fit: fill; border-radius: 0; border: 2px solid #d0d0d0;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body text-start"
+                style="padding: 5px; height: 100px; display: flex; flex-direction: column; justify-content: flex-start;">
+                <h5 class="card-title"
+                  style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; margin: 0; text-align: left; font-size: 14px;">
+                  {{this.name}}
+                </h5>
+                <p class="card-text" style="margin-top: 10px; text-align: left; font-size: 12px;">
+                  <span style="color: red;">{{formatPrice this.price}}₫</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      {{/each}}
+
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById('fileInput').addEventListener('change', function (event) {
+    const file = event.target.files[0]; // Get the selected file
+    const fileInfo = document.getElementById('fileInfo');
+
+    // Clear previous file info and image
+    fileInfo.innerHTML = '';
+
+    if (file) {
+      // Display file info
+      fileInfo.innerHTML = `
+        <p>File: ${file.name}</p>
+      `;
+
+      // Create a FileReader to read the file and display a preview
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result; // Set the source to the file data
+        img.style.maxWidth = '200px'; // Limit the image size
+        img.style.marginTop = '10px'; // Add some margin
+        fileInfo.appendChild(img); // Append the image to the fileInfo div
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    } else {
+      fileInfo.innerHTML = '<p>No file chosen.</p>'; // No file selected
+    }
+  });
+
+  document.getElementById('fileUploadForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+
+    const fileInput = document.getElementById('fileInput');
+    const predictionResult = document.getElementById('predictionResult');
+
+    if (fileInput.files.length > 0) { // Check if a file was chosen
+      const file = fileInput.files[0]; // Access the first file
+
+      // Send the file to the API
+      const formData = new FormData();
+      formData.append('image', file);
+
+      fetch('http://127.0.0.1:5000/predict', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Update the text field with the prediction results
+          let clothing_type = data.clothing_type;
+        
+          let tmp = clothing_type;
+          tmp = tmp.replace(/_/g, " ");
+          const text = document.getElementById('text');
+
+          text.value = `${tmp}`; // Set the text field
+
+          // Submit the form after setting the text value
+          document.getElementById('fileUploadForm').submit();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          predictionResult.innerHTML = '<p>An error occurred while processing the image.</p>';
+        });
+
+    } else {
+      predictionResult.innerHTML = '<p>No file chosen.</p>'; // No file selected
+    }
+  });
+</script>

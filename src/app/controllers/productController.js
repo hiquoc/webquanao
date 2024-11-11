@@ -14,7 +14,8 @@ class productController {
           reject("Database query error for product: " + err);
         }
         if (results.length === 0) {
-          res.render("/");
+          res.redirect("/");
+          return
         }
         resolve(results[0]);
       });

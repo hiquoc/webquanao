@@ -86,19 +86,12 @@ class mainController {
         type = 8;
         name = "Quần short";
         break;
-      case "giay":
-        type = 9;
-        name = "Giày";
-        break;
-      case "tui":
-        type = 10;
-        name = "Túi";
-        break;
       default:
         return res.redirect("/");
     }
     const sort = req.query.sort;
-    let sql = "SELECT * FROM product WHERE category_id=(?) and status='Còn hàng'";
+    let sql =
+      "SELECT * FROM product WHERE category_id=(?) and status='Còn hàng'";
 
     if (sort === "thap-den-cao") {
       sql += " ORDER BY price ASC"; // Sort low to high
@@ -122,7 +115,8 @@ class mainController {
           product.mainImage = mainImage;
           product.otherImages = otherImages;
         });
-        const sql2 = "SELECT * FROM product where status='Còn hàng' ORDER BY sold DESC LIMIT 4;";
+        const sql2 =
+          "SELECT * FROM product where status='Còn hàng' ORDER BY sold DESC LIMIT 4;";
         db.query(sql2, (err, results1) => {
           if (err) {
             console.error("Database query error:", err);
@@ -148,7 +142,8 @@ class mainController {
   search(req, res) {
     const text = req.query.text;
     const user = req.cookies.user;
-    const sql2 = "SELECT * FROM product where status='Còn hàng' ORDER BY sold DESC LIMIT 4;";
+    const sql2 =
+      "SELECT * FROM product where status='Còn hàng' ORDER BY sold DESC LIMIT 4;";
     db.query(sql2, (err, results1) => {
       if (err) {
         console.error("Database query error:", err);
@@ -161,7 +156,8 @@ class mainController {
         product.mainImage = mainImage;
       });
       const sort = req.query.sort;
-      let sql = "SELECT * FROM product WHERE name LIKE ? and status='Còn hàng'";
+      let sql =
+        "SELECT * FROM product WHERE (name LIKE ? or color LIKE ?) and status='Còn hàng'";
       if (sort === "thap-den-cao") {
         sql += " ORDER BY price ASC"; // Sort low to high
       } else if (sort === "cao-den-thap") {
@@ -171,7 +167,7 @@ class mainController {
       } else if (sort === "mua-nhieu") {
         sql += " ORDER BY sold DESC"; // Sort by newest
       }
-      db.query(sql, [`%${text}%`], (err, results) => {
+      db.query(sql, [`%${text}%`, `%${text}%`], (err, results) => {
         if (err) {
           console.error("Database query error:", err);
           return res.status(500).send("Server error");
@@ -204,16 +200,21 @@ class mainController {
     });
   }
   new(req, res) {
+    let text="Sản phẩm";
     const sort = req.query.sort;
     let sql = "SELECT * FROM product where status='Còn hàng'";
     if (sort === "thap-den-cao") {
       sql += " ORDER BY price ASC LIMIT 12"; // Sort low to high
     } else if (sort === "cao-den-thap") {
       sql += " ORDER BY price DESC LIMIT 12"; // Sort high to low
-    } else if (sort === "moi-nhap") {
+    } else if (sort === "moi-nhat") {
       sql += " ORDER BY product_id DESC LIMIT 12"; // Sort by newest
+      text= "Hàng mới về"
+    } else if (sort === "mua-nhieu") {
+      sql += " ORDER BY sold DESC LIMIT 12"; // Sort by newest
+      text= "Hot nhất"
     }
-    
+
     db.query(sql, (err, results) => {
       if (err) {
         console.error("Database query error:", err);
@@ -241,13 +242,34 @@ class mainController {
           });
           const user = req.cookies.user;
           res.render("category", {
-            name: "Hàng mới về",
             products: results,
             hot: results1,
+            name:text,
             user: user ? JSON.parse(user) : null,
           });
         });
       }
+    });
+  }
+  guess(req, res) {
+    const user = req.cookies.user;
+    const sql2 =
+      "SELECT * FROM product where status='Còn hàng' ORDER BY sold DESC LIMIT 4;";
+    db.query(sql2, (err, results1) => {
+      if (err) {
+        console.error("Database query error:", err);
+        return res.status(500).send("Server error");
+      }
+      results1.forEach((product) => {
+        const images = product.image.split(",");
+        const mainImage =
+          images.find((img) => img.includes("main")) || images[0];
+        product.mainImage = mainImage;
+      });
+      res.render("guess", {
+        hot: results1,
+        user: user ? JSON.parse(user) : null,
+      });
     });
   }
 }

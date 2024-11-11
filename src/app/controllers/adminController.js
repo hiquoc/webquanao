@@ -15,15 +15,15 @@ class adminController {
     let query = "SELECT * FROM product";
 
     if (sort === "thap-den-cao") {
-      query += " ORDER BY price ASC"; // Sort low to high
+      query += " ORDER BY price ASC LIMIT 20"; // Sort low to high
     } else if (sort === "cao-den-thap") {
-      query += " ORDER BY price DESC"; // Sort high to low
+      query += " ORDER BY price DESC LIMIT 20"; // Sort high to low
     } else if (sort === "moi-nhap") {
-      query += " ORDER BY product_id DESC"; // Sort by newest
+      query += " ORDER BY product_id DESC LIMIT 20"; // Sort by newest
     } else if (sort === "mua-nhieu") {
-      query += " ORDER BY sold DESC"; // Sort by newest
+      query += " ORDER BY sold DESC LIMIT 20"; // Sort by newest
     } else {
-      query += " ORDER BY product_id DESC";
+      query += " ORDER BY product_id DESC LIMIT 20";
     }
 
     db.query(query, (err, results) => {
@@ -372,13 +372,13 @@ class adminController {
     const sort = req.query.sort;
     let sql = "SELECT * FROM product WHERE name LIKE ?";
     if (sort === "thap-den-cao") {
-      sql += " ORDER BY price ASC"; // Sort low to high
+      sql += " ORDER BY price ASC LIMIT 20"; // Sort low to high
     } else if (sort === "cao-den-thap") {
-      sql += " ORDER BY price DESC"; // Sort high to low
+      sql += " ORDER BY price DESC LIMIT 20"; // Sort high to low
     } else if (sort === "moi-nhap") {
-      sql += " ORDER BY product_id DESC"; // Sort by newest
+      sql += " ORDER BY product_id DESC LIMIT 20"; // Sort by newest
     } else if (sort === "mua-nhieu") {
-      sql += " ORDER BY sold DESC"; // Sort by newest
+      sql += " ORDER BY sold DESC LIMIT 20"; // Sort by newest
     }
     db.query(sql, [`%${text}%`], (err, results) => {
       if (err) {
@@ -426,7 +426,7 @@ class adminController {
           LEFT JOIN address ON account.account_id = address.account_id
           WHERE cart.account_id = ?
           `;
-      const sort=req.query.sort;
+      const sort = req.query.sort;
       if (sort === "dang-giao") {
         sql += " AND cart.status = 'đang giao hàng' ORDER BY cart.date DESC";
       } else if (sort === "da-giao") {
@@ -511,6 +511,13 @@ class adminController {
           console.error("Database query error:", err);
           return res.status(500).send("Server error");
         }
+        if (results.length == 0) {
+          res.render(`admin/order`, {
+            note: "Lịch sử đơn hàng trống!",
+            user: user ? JSON.parse(user) : null,
+          });
+          return;
+        }
         results.forEach((product) => {
           const images = product.product_image.split(",");
           const mainImage =
@@ -533,7 +540,6 @@ class adminController {
     }
   }
   allorderPost(req, res) {
-    const account_id = req.params.id;
     const id = req.body.id;
     const sql = "UPDATE cart set status='đã giao' where id=?";
     db.query(sql, [id], (err) => {
@@ -544,5 +550,72 @@ class adminController {
       res.redirect(`/admin/order`);
     });
   }
+  xoaorder(req, res) {
+    const id = req.body.xoa_id;
+    console.log(id);
+    const sql = "DELETE from cart where id=?";
+    db.query(sql, [id], (err) => {
+      if (err) {
+        console.error("Database query error:", err);
+        return res.status(500).send("Server error");
+      }
+      res.redirect(`/admin/order`);
+    });
+  }
+  doanhthu(req, res) {
+    const user = req.cookies.user;
+    if(!user){
+      res.redirect("/")
+    }
+    const sql = `SELECT c.name AS danhmuc, SUM(cart.number) AS luotmua
+                 FROM cart
+                 JOIN product p ON cart.product_id = p.product_id
+                 JOIN category c ON p.category_id = c.category_id
+                 WHERE cart.status = 'đã giao'
+                 GROUP BY c.name;`;
+    new Promise((resolve, reject) => {
+      db.query(sql, (err, results) => {
+        if (err) {
+          reject("Error: " + err.message);
+        } else {
+          resolve(results);
+        }
+      });
+    })
+      .then((pie) => {
+        const sql1 = `SELECT DATE_FORMAT(cart.date, '%Y-%u') AS tuan, 
+                      SUM(cart.number) AS luotmua, 
+                      SUM(cart.price) AS doanhthu
+                      FROM cart
+                      WHERE cart.status = 'đã giao'
+                      GROUP BY tuan
+                      ORDER BY tuan ASC
+                      LIMIT 5;`;
+  
+        new Promise((resolve, reject) => {
+          db.query(sql1, (err, results) => {
+            if (err) {
+              reject("Error: " + err.message);
+            } else {
+              resolve(results);
+            }
+          });
+        })
+          .then((doanhthu) => {
+            res.render("admin/doanhthu", {
+              user: user ? JSON.parse(user) : null,
+              doanhthu: JSON.stringify(doanhthu),
+              pie: JSON.stringify(pie)
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  
 }
 module.exports = new adminController();

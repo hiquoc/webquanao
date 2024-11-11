@@ -42,7 +42,7 @@
                         </select>
                     </div>
                     <div style="flex: 1;">
-                        <select name="quan" required
+                        <select name="quan" required id="quan"
                             style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 15px;">
                             <option value="">Chọn Quận/Huyện</option>
                             <option value="Quận 1" {{#ifEqual address.quan "Quận 1" }}selected{{/ifEqual}}>Quận 1</option>
@@ -84,19 +84,19 @@
                 </div>
                 <div style="margin-bottom: 15px; display: flex; gap: 4%;">
                     <div style="flex: 1;">
-                        <input type="phuong" name="phuong" placeholder="Phường/ Xã" required value="{{address.phuong}}"
+                        <input type="phuong" id="phuong" name="phuong" placeholder="Phường/ Xã" required value="{{address.phuong}}" 
                             style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px; margin-bottom: 5px;">
                         <p style="font-size: 14px; color: #777; margin-top: 2px;">Ví dụ: Tăng Nhơn Phú A</p>
                     </div>
                     <div style="flex: 1;">
-                        <input type="text" id="street" name="nha" placeholder="Số nhà/ tên đường" required
+                        <input type="text" id="nha" name="nha" placeholder="Số nhà/ tên đường" required
                             value="{{address.nha}}"
                             style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
                         <p style="margin-top: 5px; font-size: 14px; color: #777;">Ví dụ: 33 đường Lê Duẩn</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <input type="text" id="building" name="ghichu" placeholder="Ghi chú" value="{{address.ghichu}}"
+                    <input type="text" id="ghichu" name="ghichu" placeholder="Ghi chú" value="{{address.ghichu}}" required
                         style="width: 100%; padding: 12px; border: 1px solid #000000; border-radius: 0px; font-size: 16px;">
                     <p style="margin-top: 5px; font-size: 14px; color: #777;">Ví dụ: Tên tòa nhà, tầng</p>
                 </div>
@@ -262,6 +262,16 @@
             }
             else if (accounts.some(obj => obj.email === email.value) == true) {
                 alerttext.innerHTML = "Email đã được sử dụng để đăng kí!";
+                return false;
+            }
+            //dia chi
+            const tinh=document.getElementById('tinh').value
+            const quan=document.getElementById('quan').value
+            const phuong=document.getElementById('phuong').value
+            const nha=document.getElementById('nha').value
+            const ghichu=document.getElementById('ghichu').value
+            if(tinh==""||quan==""||phuong==""||nha==""||ghichu==""){
+                alerttext.innerHTML = "Vui lòng kiểm tra lại địa chỉ giao hàng!";
                 return false;
             }
             function containsOnlyText(str) {
