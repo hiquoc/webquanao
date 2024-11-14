@@ -1,4 +1,11 @@
 const db = require("../config/mysql.js");
+const path = require("path");
+const fs = require("fs");
+const axios = require("axios");
+const stream = require("stream");
+const { promisify } = require("util");
+const pipeline = promisify(stream.pipeline);
+
 class mainController {
   main(req, res) {
     const query = "SELECT * FROM product where status='Còn hàng'";
@@ -200,7 +207,7 @@ class mainController {
     });
   }
   new(req, res) {
-    let text="Sản phẩm";
+    let text = "Sản phẩm";
     const sort = req.query.sort;
     let sql = "SELECT * FROM product where status='Còn hàng'";
     if (sort === "thap-den-cao") {
@@ -209,10 +216,10 @@ class mainController {
       sql += " ORDER BY price DESC LIMIT 12"; // Sort high to low
     } else if (sort === "moi-nhat") {
       sql += " ORDER BY product_id DESC LIMIT 12"; // Sort by newest
-      text= "Hàng mới về"
+      text = "Hàng mới về";
     } else if (sort === "mua-nhieu") {
       sql += " ORDER BY sold DESC LIMIT 12"; // Sort by newest
-      text= "Hot nhất"
+      text = "Hot nhất";
     }
 
     db.query(sql, (err, results) => {
@@ -244,7 +251,7 @@ class mainController {
           res.render("category", {
             products: results,
             hot: results1,
-            name:text,
+            name: text,
             user: user ? JSON.parse(user) : null,
           });
         });
@@ -271,6 +278,122 @@ class mainController {
         user: user ? JSON.parse(user) : null,
       });
     });
+  }
+  guessPost(req, res) {
+    if (
+      req.cookies.user == null ||
+      JSON.parse(req.cookies.user).admin == false
+    ) {
+      res.redirect("/");
+    }
+    const text1 = req.body.text;
+    const text = text1.replace(/_/g, " ");
+    console.log(req.body);
+
+    const user = req.cookies.user;
+    const sql2 =
+      "SELECT * FROM product where status='Còn hàng' ORDER BY sold DESC LIMIT 4;";
+    db.query(sql2, (err, results1) => {
+      if (err) {
+        console.error("Database query error:", err);
+        return res.status(500).send("Server error");
+      }
+      results1.forEach((product) => {
+        const images = product.image.split(",");
+        const mainImage =
+          images.find((img) => img.includes("main")) || images[0];
+        product.mainImage = mainImage;
+      });
+      const img = "../up/img.jpg";
+      const sort = req.query.sort;
+      let sql =
+        "SELECT * FROM product WHERE (name LIKE ? or color LIKE ?) and status='Còn hàng'";
+      if (sort === "thap-den-cao") {
+        sql += " ORDER BY price ASC"; // Sort low to high
+      } else if (sort === "cao-den-thap") {
+        sql += " ORDER BY price DESC"; // Sort high to low
+      } else if (sort === "moi-nhap") {
+        sql += " ORDER BY product_id DESC"; // Sort by newest
+      } else if (sort === "mua-nhieu") {
+        sql += " ORDER BY sold DESC"; // Sort by newest
+      }
+      db.query(sql, [`%${text}%`, `%${text}%`], (err, results) => {
+        if (err) {
+          console.error("Database query error:", err);
+          return res.status(500).send("Server error");
+        }
+        if (results.length == 0) {
+          res.render("guessearch", {
+            text: text,
+            img: img,
+            hot: results1,
+            none: "Không có kết quả",
+            user: user ? JSON.parse(user) : null,
+          });
+          return;
+        }
+        results.forEach((product) => {
+          const images = product.image.split(",");
+          const mainImage =
+            images.find((img) => img.includes("main")) || images[0];
+          const otherImages = images.filter((img) => img !== mainImage);
+          product.mainImage = mainImage;
+          product.otherImages = otherImages;
+        });
+
+        res.render("guessearch", {
+          text: text,
+          img: img,
+          hot: results1,
+          products: results,
+          user: user ? JSON.parse(user) : null,
+        });
+      });
+    });
+  }
+
+  async save(req, res) {
+    try {
+      const { img, type } = req.body;
+      if (!img || !type) {
+        return res.status(400).json({ message: "Thiếu file hay type" });
+      }
+      const fileExtension = path.extname(img);
+      if (
+        ![".jpg", ".jpeg", ".png", ".gif"].includes(fileExtension.toLowerCase())
+      ) {
+        return res
+          .status(400)
+          .json({
+            message: "File ko đc hỗ trợ.",
+          });
+      }
+
+      const imageName = Date.now() + fileExtension;
+
+      const folderPath = path.join(__dirname, "../../../save", type);
+      if (!fs.existsSync(folderPath)) {
+        fs.mkdirSync(folderPath, { recursive: true });
+      }
+
+      const filePath = path.join(folderPath, imageName);
+
+      const response = await axios({
+        method: "get",
+        url: img,
+        responseType: "stream",
+      });
+
+      await pipeline(response.data, fs.createWriteStream(filePath));
+
+      res.json({
+        message: "Lưu thành công",
+        savedImagePath: filePath,
+      });
+    } catch (error) {
+      console.error("Err:", error);
+      res.status(500).json({ message: "Error" });
+    }
   }
 }
 module.exports = new mainController();
